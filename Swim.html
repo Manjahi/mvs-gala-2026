@@ -1,0 +1,4007 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mountain View School - Inter House Swimming Gala 2026</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- Firebase SDK -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        set,
+        onValue,
+        push,
+        remove,
+      } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+      // Your Firebase config (replace with your own)
+      const firebaseConfig = {
+        apiKey: "AIzaSyCUXeKQhoId-Uef2Gc9WlrsNSqMdfbZS00",
+        authDomain: "mvs-gala-2026.firebaseapp.com",
+        databaseURL:
+          "https://mvs-gala-2026-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "mvs-gala-2026",
+        storageBucket: "mvs-gala-2026.firebasestorage.app",
+        messagingSenderId: "634576692729",
+        appId: "1:634576692729:web:09f70bef843c16110a0928",
+      };
+
+      // Initialize Firebase
+      window.firebaseApp = initializeApp(firebaseConfig);
+      window.db = getDatabase(firebaseApp);
+      window.firebaseRefs = { ref, set, onValue, push, remove };
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --mvs-blue: #1e3a5f;
+        --mvs-red: #c41e3a;
+        --mvs-white: #ffffff;
+        --swimmer-red: #9b1b30;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #1e3a5f 0%,
+          #2c5282 50%,
+          #1e3a5f 100%
+        );
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* Background Logo */
+      .bg-logo {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80vh;
+        height: 80vh;
+        opacity: 0.06;
+        pointer-events: none;
+        z-index: 0;
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><circle cx="200" cy="200" r="190" fill="none" stroke="white" stroke-width="8"/><path d="M100 280 L200 120 L300 280" fill="none" stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M140 280 L200 180 L260 280" fill="none" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><text x="200" y="340" text-anchor="middle" fill="white" font-family="serif" font-size="28" font-style="italic">Age Quod Agis</text><text x="200" y="60" text-anchor="middle" fill="white" font-family="sans-serif" font-size="32" font-weight="bold" letter-spacing="3">MOUNTAIN VIEW</text><text x="200" y="85" text-anchor="middle" fill="white" font-family="sans-serif" font-size="24" letter-spacing="8">SCHOOL</text><text x="60" y="220" text-anchor="middle" fill="white" font-family="sans-serif" font-size="16" transform="rotate(-90 60 200)">EST 1985</text><text x="340" y="220" text-anchor="middle" fill="white" font-family="sans-serif" font-size="16" transform="rotate(90 340 200)">1985</text></svg>');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      .container {
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Header with Swimmer Graphic */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        animation: slideDown 0.8s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex: 1;
+      }
+
+      .branding-logo {
+        width: 80px;
+        height: 80px;
+        background: var(--mvs-blue);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        flex-shrink: 0;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .branding-logo img {
+        width: 70px;
+        height: 70px;
+        object-fit: contain;
+        border-radius: 50%;
+      }
+
+      .branding-logo svg {
+        width: 70px;
+        height: 70px;
+      }
+
+      .swimmer-graphic {
+        position: absolute;
+        right: 200px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 120px;
+        height: 60px;
+        opacity: 0.9;
+        z-index: 1;
+      }
+
+      .swimmer-graphic img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .swimmer-graphic svg {
+        width: 100%;
+        height: 100%;
+        fill: var(--mvs-red);
+        filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+      }
+
+      /* Logo and Swimmer from index.html */
+      .logo-container {
+        position: relative;
+      }
+
+      .mvs-logo {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        animation: float 3s ease-in-out infinite;
+        border-radius: 50%;
+      }
+
+      .swimmer-container {
+        margin-left: 10px;
+      }
+
+      .swimmer-img {
+        width: 140px;
+        height: 100px;
+        object-fit: contain;
+        filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+        animation: swim 3s ease-in-out infinite;
+      }
+
+      .swimmer-graphic-fallback {
+        width: 140px;
+        height: 100px;
+        animation: swim 3s ease-in-out infinite;
+      }
+
+      .swimmer-graphic-fallback svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .theme-text {
+        font-size: 1.4rem;
+        color: var(--mvs-red);
+        font-weight: 700;
+        font-style: italic;
+        margin-bottom: 5px;
+        letter-spacing: 2px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1s ease 0.5s both;
+      }
+
+      @keyframes swim {
+        0%,
+        100% {
+          transform: translateX(0) rotate(0deg);
+        }
+        50% {
+          transform: translateX(10px) rotate(-2deg);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .header-text h1 {
+        font-size: 1.8rem;
+        color: var(--mvs-blue);
+        font-weight: 800;
+        margin-bottom: 5px;
+        line-height: 1.2;
+      }
+
+      .header-text .subtitle {
+        color: #4a5568;
+        font-size: 0.95rem;
+        font-weight: 500;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        z-index: 2;
+      }
+
+      .anniversary-badge {
+        background: linear-gradient(135deg, var(--mvs-red) 0%, #9b1b30 100%);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 30px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+      }
+
+      .live-indicator {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #c6f6d5;
+        color: #22543d;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 0.85rem;
+      }
+
+      .pulse {
+        width: 8px;
+        height: 8px;
+        background: #48bb78;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(72, 187, 120, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(72, 187, 120, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(72, 187, 120, 0);
+        }
+      }
+
+      /* Main Layout */
+      .main-layout {
+        display: grid;
+        grid-template-columns: 1fr 400px;
+        gap: 20px;
+      }
+
+      @media (max-width: 1200px) {
+        .main-layout {
+          grid-template-columns: 1fr;
+        }
+        .swimmer-graphic {
+          display: none;
+        }
+      }
+
+      .content-area {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 25px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        min-height: 70vh;
+        position: relative;
+      }
+
+      /* Video Sidebar */
+      .video-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .video-card {
+        background: rgba(0, 0, 0, 0.9);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+      }
+
+      .video-container iframe,
+      .video-container video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .video-info {
+        padding: 15px;
+        color: white;
+      }
+
+      .video-title {
+        font-weight: 700;
+        margin-bottom: 5px;
+        font-size: 0.95rem;
+      }
+
+      .video-meta {
+        font-size: 0.8rem;
+        opacity: 0.7;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .add-video-btn {
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px dashed rgba(255, 255, 255, 0.4);
+        color: white;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+      }
+
+      .add-video-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.6);
+      }
+
+      /* Video Showcase Mode (Full Main View) */
+      .video-showcase {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        border-radius: 20px;
+        overflow: hidden;
+        z-index: 10;
+      }
+
+      .video-showcase.active {
+        display: block;
+      }
+
+      .video-showcase-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .video-showcase-container iframe,
+      .video-showcase-container video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .video-overlay-info {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 10px;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+
+      /* Tab Navigation */
+      .tab-nav {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+      }
+
+      .tab-btn {
+        padding: 12px 24px;
+        background: #e2e8f0;
+        border: none;
+        border-radius: 30px;
+        color: #4a5568;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .tab-btn:hover {
+        background: #cbd5e0;
+        transform: translateY(-2px);
+      }
+
+      .tab-btn.active {
+        background: var(--mvs-blue);
+        color: white;
+        box-shadow: 0 4px 15px rgba(30, 58, 95, 0.4);
+      }
+
+      .tab-btn .timer-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.5);
+        width: 0%;
+        transition: width 0.1s linear;
+      }
+
+      /* Content Sections */
+      .tab-content {
+        display: none;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Standings Styles */
+      .houses-podium {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .house-rank {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        border: 3px solid transparent;
+      }
+
+      .house-rank:hover {
+        transform: translateX(5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .rank-1 {
+        background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+        box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        border-color: #ffd700;
+        animation: pulse-gold 2s infinite;
+      }
+
+      .rank-2 {
+        background: linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 100%);
+        box-shadow: 0 10px 30px rgba(192, 192, 192, 0.3);
+        border-color: #c0c0c0;
+      }
+
+      .rank-3 {
+        background: linear-gradient(135deg, #cd7f32 0%, #b87333 100%);
+        box-shadow: 0 10px 30px rgba(205, 127, 50, 0.3);
+        border-color: #cd7f32;
+      }
+
+      .rank-4,
+      .rank-5,
+      .rank-other {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border: 3px solid #dee2e6;
+      }
+
+      @keyframes pulse-gold {
+        0%,
+        100% {
+          box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+        50% {
+          box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+        }
+      }
+
+      .rank-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        width: 60px;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.3);
+      }
+
+      .rank-1 .rank-number,
+      .rank-2 .rank-number,
+      .rank-3 .rank-number {
+        color: rgba(0, 0, 0, 0.4);
+      }
+
+      .house-info {
+        flex: 1;
+        margin-left: 15px;
+      }
+
+      .house-name {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .rank-1 .house-name,
+      .rank-2 .house-name,
+      .rank-3 .house-name {
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      }
+
+      .house-color-dot {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 2px solid white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .house-stats {
+        font-size: 0.95rem;
+        opacity: 0.9;
+        color: #4a5568;
+      }
+
+      .rank-1 .house-stats,
+      .rank-2 .house-stats,
+      .rank-3 .house-stats {
+        color: rgba(255, 255, 255, 0.95);
+      }
+
+      .points-display {
+        text-align: right;
+      }
+
+      .points {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #2d3748;
+        transition: all 0.3s ease;
+      }
+
+      .rank-1 .points,
+      .rank-2 .points,
+      .rank-3 .points {
+        color: white;
+      }
+
+      .points-label {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        opacity: 0.7;
+        font-weight: 600;
+      }
+
+      .winner-crown {
+        position: absolute;
+        top: -5px;
+        right: 20px;
+        font-size: 2.5rem;
+        animation: bounce 2s infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      /* Breakdown Styles */
+      .breakdown-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .breakdown-card {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 15px;
+        padding: 20px;
+        border: 3px solid #e2e8f0;
+        transition: all 0.3s ease;
+      }
+
+      .breakdown-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .breakdown-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #e2e8f0;
+      }
+
+      .breakdown-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .medal-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin: 15px 0;
+      }
+
+      .medal-box {
+        text-align: center;
+        padding: 15px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .medal-icon {
+        font-size: 2rem;
+      }
+
+      .medal-count {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-top: 5px;
+      }
+
+      .medal-label {
+        font-size: 0.75rem;
+        color: #718096;
+        text-transform: uppercase;
+      }
+
+      /* Event Status */
+      .events-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 15px;
+        max-height: 60vh;
+        overflow-y: auto;
+        padding-right: 10px;
+      }
+
+      .event-card {
+        background: #f8f9fa;
+        border-radius: 12px;
+        padding: 15px;
+        border-left: 4px solid #cbd5e0;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .event-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .event-card.completed {
+        border-left-color: #48bb78;
+        background: #f0fff4;
+      }
+
+      .event-card.scoring {
+        border-left-color: #4299e1;
+        background: #ebf8ff;
+      }
+
+      .event-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        margin-bottom: 8px;
+      }
+
+      .event-name {
+        font-weight: 700;
+        color: #2d3748;
+        font-size: 0.95rem;
+        flex: 1;
+        margin-right: 10px;
+      }
+
+      .event-status {
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .status-completed {
+        background: #c6f6d5;
+        color: #22543d;
+      }
+
+      .status-pending {
+        background: #feebc8;
+        color: #744210;
+      }
+
+      .status-scoring {
+        background: #bee3f8;
+        color: #2a4365;
+      }
+
+      .event-meta {
+        font-size: 0.85rem;
+        color: #718096;
+        margin-bottom: 10px;
+      }
+
+      .event-scores {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 10px;
+      }
+
+      .score-badge {
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        background: white;
+        border: 1px solid #e2e8f0;
+      }
+
+      .score-badge.gold {
+        background: #ffd700;
+        color: #744210;
+      }
+      .score-badge.silver {
+        background: #c0c0c0;
+        color: #2d3748;
+      }
+      .score-badge.bronze {
+        background: #cd7f32;
+        color: white;
+      }
+
+      /* History */
+      .history-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        max-height: 60vh;
+        overflow-y: auto;
+        padding-right: 10px;
+      }
+
+      .history-item {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 4px solid var(--mvs-blue);
+        animation: slideIn 0.3s ease;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .history-time {
+        font-size: 0.85rem;
+        color: #718096;
+        margin-bottom: 8px;
+      }
+
+      .history-content {
+        font-size: 0.95rem;
+        color: #2d3748;
+      }
+
+      /* Settings Panel - Modified for no dimming */
+      .settings-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: var(--mvs-blue);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        cursor: pointer;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        z-index: 100;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .settings-btn:hover {
+        transform: scale(1.1) rotate(30deg);
+        background: var(--mvs-red);
+      }
+
+      .settings-btn.hidden {
+        display: none !important;
+      }
+
+      .settings-panel {
+        position: fixed;
+        top: 0;
+        right: -700px;
+        width: 700px;
+        height: 100vh;
+        background: white;
+        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        overflow-y: auto;
+        padding: 30px;
+        transition: right 0.3s ease;
+      }
+
+      .settings-panel.open {
+        right: 0;
+      }
+
+      @media (max-width: 768px) {
+        .settings-panel {
+          width: 100%;
+          right: -100%;
+        }
+
+        .scoring-interface {
+          padding: 15px;
+          max-width: 100%;
+          width: 98%;
+          border-radius: 15px;
+        }
+
+        .scoring-grid {
+          gap: 8px;
+        }
+
+        .score-input {
+          padding: 10px;
+        }
+
+        .score-input label {
+          min-width: auto;
+          font-size: 1rem;
+        }
+
+        .score-input input[type="number"] {
+          width: 50px !important;
+          padding: 6px 3px !important;
+          font-size: 0.95rem !important;
+        }
+
+        .individual-rankings-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .ranking-category-card {
+          padding: 15px;
+        }
+      }
+
+      .settings-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 3px solid #e2e8f0;
+      }
+
+      .settings-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--mvs-blue);
+      }
+
+      .close-settings {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #718096;
+      }
+
+      .settings-section {
+        margin-bottom: 30px;
+        padding-bottom: 30px;
+        border-bottom: 2px solid #f0f0f0;
+      }
+
+      .settings-section-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #4a5568;
+        font-size: 0.9rem;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 0.95rem;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: var(--mvs-blue);
+      }
+
+      .house-editor {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        display: grid;
+        grid-template-columns: 1fr 80px 40px;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .color-picker-wrapper {
+        position: relative;
+        width: 100%;
+        height: 40px;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 2px solid #e2e8f0;
+      }
+
+      .color-picker-wrapper input[type="color"] {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        cursor: pointer;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+      }
+
+      .btn-primary {
+        background: var(--mvs-blue);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #152a45;
+        transform: translateY(-2px);
+      }
+
+      .btn-danger {
+        background: #fc8181;
+        color: white;
+      }
+
+      .btn-danger:hover {
+        background: #f56565;
+      }
+
+      .btn-success {
+        background: #48bb78;
+        color: white;
+      }
+
+      .participant-list {
+        max-height: 300px;
+        overflow-y: auto;
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 10px;
+      }
+
+      .participant-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background: white;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+      }
+
+      .participant-info {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .participant-name {
+        font-weight: 600;
+        color: #2d3748;
+      }
+
+      .participant-house {
+        font-size: 0.8rem;
+        color: #718096;
+      }
+
+      .rotation-settings {
+        background: #ebf8ff;
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px solid #90cdf4;
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .overlay.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      /* Public View Specific Styles - Read Only */
+      .public-view .settings-btn,
+      .public-view .add-video-btn,
+      .public-view .event-card {
+        display: none !important;
+      }
+
+      .public-view .event-card.completed {
+        display: block !important;
+        pointer-events: none;
+      }
+
+      .public-view .video-sidebar {
+        display: none !important;
+      }
+
+      .public-view .main-layout {
+        grid-template-columns: 1fr !important;
+      }
+
+      .public-view .tab-btn[data-tab="2"] {
+        display: none !important;
+      }
+
+      .expired-notice {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        z-index: 10000;
+      }
+
+      .expired-notice h2 {
+        color: var(--mvs-red);
+        margin-bottom: 10px;
+      }
+
+      .qr-section {
+        background: #f0fff4;
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px solid #48bb78;
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      #qrcode {
+        margin: 15px auto;
+        padding: 10px;
+        background: white;
+        display: inline-block;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: #a0aec0;
+      }
+
+      .empty-state-icon {
+        font-size: 4rem;
+        margin-bottom: 20px;
+      }
+
+      .chart-bar {
+        height: 30px;
+        background: var(--mvs-blue);
+        border-radius: 15px;
+        margin: 10px 0;
+        position: relative;
+        overflow: hidden;
+        transition: width 0.8s ease;
+      }
+
+      .chart-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--mvs-blue) 0%, #4299e1 100%);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 15px;
+        color: white;
+        font-weight: 700;
+        font-size: 0.9rem;
+      }
+
+      .progress-indicator {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: var(--mvs-red);
+        z-index: 10000;
+        transition: width 0.1s linear;
+      }
+
+      .event-management {
+        background: #f7fafc;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        border: 2px solid #e2e8f0;
+      }
+
+      .event-item {
+        display: grid;
+        grid-template-columns: 80px 1fr 120px 100px 40px;
+        gap: 10px;
+        align-items: center;
+        padding: 10px;
+        background: white;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+      }
+
+      .scoring-interface {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.9);
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        z-index: 2000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        max-width: 800px;
+        width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .scoring-interface.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .scoring-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin: 15px 0;
+      }
+
+      .score-input {
+        text-align: left;
+        background: #f8f9fa;
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+      }
+
+      .score-input label {
+        display: inline-block;
+        font-weight: 700;
+        margin-bottom: 8px;
+        font-size: 1rem;
+        min-width: 80px;
+        color: #2d3748;
+      }
+
+      .position-select {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+      }
+
+      .pos-btn {
+        width: 40px;
+        height: 40px;
+        border: 2px solid #e2e8f0;
+        background: white;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: all 0.2s ease;
+      }
+
+      .pos-btn:hover {
+        border-color: var(--mvs-blue);
+        background: #ebf8ff;
+      }
+
+      .pos-btn.selected {
+        background: var(--mvs-blue);
+        color: white;
+        border-color: var(--mvs-blue);
+      }
+
+      .pos-btn.selected.gold {
+        background: #ffd700;
+        color: #744210;
+        border-color: #ffd700;
+      }
+      .pos-btn.selected.silver {
+        background: #c0c0c0;
+        color: #2d3748;
+        border-color: #c0c0c0;
+      }
+      .pos-btn.selected.bronze {
+        background: #cd7f32;
+        color: white;
+        border-color: #cd7f32;
+      }
+
+      /* Individual Rankings Styling */
+      .individual-rankings-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 20px;
+      }
+
+      .ranking-category-card {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 15px;
+        padding: 20px;
+        border: 3px solid #e2e8f0;
+        transition: all 0.3s ease;
+      }
+
+      .ranking-category-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .ranking-category-header {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--mvs-blue);
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e2e8f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .ranking-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .ranking-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 15px;
+        background: white;
+        border-radius: 10px;
+        border-left: 4px solid transparent;
+        transition: all 0.2s ease;
+      }
+
+      .ranking-item:hover {
+        background: #f7fafc;
+        transform: translateX(3px);
+      }
+
+      .ranking-item.rank-1 {
+        border-left-color: #ffd700;
+        background: linear-gradient(90deg, #fffbeb 0%, white 100%);
+      }
+      .ranking-item.rank-2 {
+        border-left-color: #c0c0c0;
+        background: linear-gradient(90deg, #f7fafc 0%, white 100%);
+      }
+      .ranking-item.rank-3 {
+        border-left-color: #cd7f32;
+        background: linear-gradient(90deg, #fff7ed 0%, white 100%);
+      }
+
+      .ranking-position {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-weight: 800;
+        font-size: 0.9rem;
+        margin-right: 12px;
+        flex-shrink: 0;
+      }
+
+      .ranking-position.gold {
+        background: #ffd700;
+        color: #744210;
+      }
+      .ranking-position.silver {
+        background: #c0c0c0;
+        color: #2d3748;
+      }
+      .ranking-position.bronze {
+        background: #cd7f32;
+        color: white;
+      }
+      .ranking-position.other {
+        background: #e2e8f0;
+        color: #4a5568;
+      }
+
+      .ranking-swimmer-info {
+        flex: 1;
+      }
+
+      .ranking-swimmer-name {
+        font-weight: 600;
+        color: #2d3748;
+        font-size: 0.95rem;
+      }
+
+      .ranking-swimmer-details {
+        font-size: 0.8rem;
+        color: #718096;
+        margin-top: 2px;
+      }
+
+      .ranking-time {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--mvs-blue);
+        font-family: monospace;
+      }
+
+      .ranking-filters select:focus {
+        outline: none;
+        border-color: var(--mvs-blue);
+      }
+
+      /* Time Entry Input Styling */
+      .score-input input[type="number"]::-webkit-inner-spin-button,
+      .score-input input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: inner-spin-button;
+        opacity: 1;
+      }
+
+      .score-input input[type="number"]:focus {
+        outline: none;
+        border-color: var(--mvs-blue);
+        box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.1);
+      }
+
+      .score-input input[type="number"]:disabled {
+        background: #f7fafc;
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+
+      .close-scoring {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #718096;
+      }
+
+      .tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 10px;
+      }
+
+      .subtab {
+        padding: 8px 16px;
+        background: none;
+        border: none;
+        color: #718096;
+        font-weight: 600;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+        margin-bottom: -12px;
+      }
+
+      .subtab.active {
+        color: var(--mvs-blue);
+        border-bottom-color: var(--mvs-blue);
+      }
+
+      .day-section {
+        display: none;
+      }
+
+      .day-section.active {
+        display: block;
+      }
+
+      .admin-hint {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        font-size: 0.7rem;
+        color: rgba(255, 255, 255, 0.3);
+        z-index: 50;
+      }
+
+      .phase-indicator {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        z-index: 100;
+        display: none;
+      }
+
+      .phase-indicator.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-logo"></div>
+    <div class="progress-indicator" id="progressIndicator"></div>
+    <div class="phase-indicator" id="phaseIndicator">Leaderboard Mode</div>
+
+    <button
+      class="settings-btn"
+      id="settingsBtn"
+      onclick="toggleSettings()"
+      title="Admin Settings (Ctrl+Shift+M)"
+    >
+      ⚙️
+    </button>
+
+    <div class="overlay" onclick="closeSettings()"></div>
+
+    <div class="scoring-interface" id="scoringInterface">
+      <button class="close-scoring" onclick="closeScoring()">✕</button>
+      <h2
+        style="margin-bottom: 5px; color: var(--mvs-blue)"
+        id="scoringEventTitle"
+      >
+        Event Name
+      </h2>
+      <p style="color: #718096; margin-bottom: 20px" id="scoringEventDetails">
+        Category • Day
+      </p>
+
+      <div class="scoring-grid" id="houseScoringInputs"></div>
+
+      <div
+        style="
+          background: #f7fafc;
+          padding: 12px;
+          border-radius: 8px;
+          margin: 15px 0;
+          font-size: 0.85rem;
+          color: #4a5568;
+          line-height: 1.4;
+        "
+      >
+        <strong>🏊 Enter times (MM:SS.MS)</strong> → Auto-ranked by speed.<br />
+        <span style="font-size: 0.8rem"
+          >Points: 1st=7, 2nd=5, 3rd=4, 4th=3, 5th=2, 6th=1 | Relay ×2</span
+        >
+      </div>
+
+      <div id="rankingPreview" style="margin-bottom: 15px; display: none">
+        <div
+          style="
+            background: #e6fffa;
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 4px solid #38b2ac;
+          "
+        >
+          <strong>🏆 Current Ranking:</strong>
+          <div
+            id="rankingList"
+            style="margin-top: 5px; font-size: 0.9rem"
+          ></div>
+        </div>
+      </div>
+
+      <button
+        class="btn btn-primary"
+        onclick="saveEventScores()"
+        style="width: 100%"
+      >
+        Save Scores
+      </button>
+    </div>
+
+    <div class="settings-panel" id="settingsPanel">
+      <div class="settings-header">
+        <div class="settings-title">⚙️ Administration Panel</div>
+        <button class="close-settings" onclick="closeSettings()">✕</button>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">🔗 Public Access</div>
+        <div class="qr-section">
+          <p style="margin-bottom: 10px; color: #2d3748; font-weight: 600">
+            Share Live Leaderboard
+          </p>
+          <p style="font-size: 0.85rem; color: #718096; margin-bottom: 15px">
+            Link expires in 24 hours
+          </p>
+          <div id="qrcode"></div>
+          <div
+            id="publicLink"
+            style="
+              margin-top: 10px;
+              word-break: break-all;
+              font-size: 0.8rem;
+              color: #4a5568;
+            "
+          ></div>
+          <button
+            class="btn btn-primary"
+            onclick="generatePublicLink()"
+            style="margin-top: 15px; width: 100%"
+          >
+            Generate New QR Code
+          </button>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">🏊 Event Management</div>
+        <div class="tabs">
+          <button class="subtab active" onclick="switchEventTab('day1')">
+            Day 1 (Mar 31)
+          </button>
+          <button class="subtab" onclick="switchEventTab('day2')">
+            Day 2 (Apr 1)
+          </button>
+        </div>
+
+        <div id="day1-events" class="day-section active">
+          <div id="day1EventList"></div>
+          <button
+            class="btn btn-primary"
+            onclick="addEvent('day1')"
+            style="width: 100%; margin-top: 10px"
+          >
+            + Add Event
+          </button>
+        </div>
+
+        <div id="day2-events" class="day-section">
+          <div id="day2EventList"></div>
+          <button
+            class="btn btn-primary"
+            onclick="addEvent('day2')"
+            style="width: 100%; margin-top: 10px"
+          >
+            + Add Event
+          </button>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">🏠 Manage Houses</div>
+        <div id="housesList"></div>
+        <button
+          class="btn btn-primary"
+          onclick="addHouse()"
+          style="width: 100%; margin-top: 10px"
+        >
+          + Add New House
+        </button>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">👥 Manage Participants</div>
+        <div class="form-group">
+          <label>Participant Name</label>
+          <input type="text" id="participantName" placeholder="Enter name" />
+        </div>
+        <div class="form-group">
+          <label>Assign to House</label>
+          <select id="participantHouse"></select>
+        </div>
+        <button
+          class="btn btn-primary"
+          onclick="addParticipant()"
+          style="width: 100%"
+        >
+          Add Participant
+        </button>
+
+        <div style="margin-top: 20px">
+          <label style="font-weight: 600; margin-bottom: 10px; display: block"
+            >Current Participants</label
+          >
+          <div class="participant-list" id="participantsList"></div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">🎥 Manage Videos</div>
+        <div class="form-group">
+          <label>Video Title</label>
+          <input
+            type="text"
+            id="videoTitle"
+            placeholder="e.g., 100m Final Highlights"
+          />
+        </div>
+        <div class="form-group">
+          <label>Video URL (YouTube or direct video files only)</label>
+          <input
+            type="text"
+            id="videoUrl"
+            placeholder="https://youtube.com/watch?v=... or https://..."
+          />
+          <input
+            type="file"
+            id="videoFile"
+            accept="video/mp4,video/webm"
+            style="margin-top: 10px"
+            onchange="handleLocalVideo(this)"
+          />
+          <small style="color: #718096; display: block; margin-top: 5px"
+            ><strong>Note:</strong> YouTube and direct MP4/WebM files only.
+            <br />
+            Instagram/Facebook videos are blocked by their platforms.</small
+          >
+        </div>
+        <button
+          class="btn btn-primary"
+          onclick="addVideo()"
+          style="width: 100%"
+        >
+          Add Video
+        </button>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">🔄 Auto-Rotation Settings</div>
+        <div class="rotation-settings">
+          <div class="form-group">
+            <label>Leaderboard Tab Duration (seconds)</label>
+            <input
+              type="number"
+              id="rotationInterval"
+              value="10"
+              min="5"
+              max="60"
+            />
+          </div>
+          <div class="form-group">
+            <label>Video Duration (seconds each)</label>
+            <input
+              type="number"
+              id="videoDuration"
+              value="30"
+              min="10"
+              max="300"
+            />
+          </div>
+          <div class="form-group">
+            <label>Leaderboard Cycles before Videos</label>
+            <input
+              type="number"
+              id="leaderboardCycles"
+              value="3"
+              min="1"
+              max="10"
+            />
+          </div>
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="autoRotate" checked /> Enable
+              Auto-Rotation
+            </label>
+          </div>
+          <button
+            class="btn btn-success"
+            onclick="saveRotationSettings()"
+            style="width: 100%"
+          >
+            Save Settings
+          </button>
+        </div>
+      </div>
+
+      <div class="settings-section" style="border-bottom: none">
+        <div class="settings-section-title">💾 Data Management</div>
+        <button
+          class="btn btn-primary"
+          onclick="exportData()"
+          style="width: 100%; margin-bottom: 10px"
+        >
+          📥 Export All Data
+        </button>
+        <button
+          class="btn btn-danger"
+          onclick="resetAllData()"
+          style="width: 100%"
+        >
+          ⚠️ Reset Everything
+        </button>
+      </div>
+    </div>
+
+    <div class="container">
+      <header>
+        <div class="header-left">
+          <!-- MVS 40th Anniversary Logo -->
+          <div
+            class="logo-container"
+            id="logoContainer"
+            onclick="handleLogoClick()"
+          >
+            <img
+              src="assets/mvs-logo-40th.png"
+              alt="Mountain View School 40th Anniversary"
+              class="mvs-logo"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'flex';
+              "
+            />
+            <!-- Fallback SVG if image fails -->
+            <div class="branding-logo" style="display: none">
+              <svg
+                viewBox="0 0 100 100"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="48"
+                  stroke="white"
+                  stroke-width="2"
+                />
+                <path
+                  d="M20 70 L50 25 L80 70"
+                  stroke="white"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M30 70 L50 40 L70 70"
+                  stroke="white"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Swimmer Graphic -->
+          <div class="swimmer-container">
+            <img
+              src="assets/swimmer-red.png"
+              alt="Swimmer"
+              class="swimmer-img"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'block';
+              "
+            />
+            <div class="swimmer-graphic-fallback" style="display: none">
+              <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M20,50 Q40,30 60,35 T100,40 T140,35 T180,30"
+                  fill="none"
+                  stroke="#c41e3a"
+                  stroke-width="8"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M60,35 Q70,20 85,25 T110,30"
+                  fill="none"
+                  stroke="#c41e3a"
+                  stroke-width="6"
+                  stroke-linecap="round"
+                />
+                <ellipse cx="30" cy="45" rx="12" ry="10" fill="#c41e3a" />
+                <path
+                  d="M15,45 Q10,35 20,30 T35,25"
+                  fill="none"
+                  stroke="#c41e3a"
+                  stroke-width="5"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M100,40 Q120,50 140,45 T170,40"
+                  fill="none"
+                  stroke="#c41e3a"
+                  stroke-width="6"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M140,35 Q160,25 175,30"
+                  fill="none"
+                  stroke="#c41e3a"
+                  stroke-width="5"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M40,60 Q80,55 120,60 T180,55"
+                  fill="none"
+                  stroke="#c41e3a"
+                  stroke-width="3"
+                  opacity="0.6"
+                />
+                <path
+                  d="M50,70 Q90,65 130,70"
+                  fill="none"
+                  stroke="#c41e3a"
+                  stroke-width="2"
+                  opacity="0.4"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Title and Theme -->
+          <div class="header-content">
+            <div class="header-text">
+              <h1>Inter House Swimming Gala 2026</h1>
+              <div class="theme-text">"Just Keep Swimming"</div>
+              <div class="subtitle">
+                Live Championship Leaderboard • March 31 - April 1, 2026
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <div class="anniversary-badge">40 Years of Excellence</div>
+          <div class="live-indicator">
+            <span class="pulse"></span>
+            LIVE
+          </div>
+        </div>
+      </header>
+
+      <div class="main-layout">
+        <div class="content-area">
+          <div class="video-showcase" id="videoShowcase">
+            <div class="video-showcase-container" id="videoShowcaseContainer">
+              <!-- Video content injected here -->
+            </div>
+            <div class="video-overlay-info" id="videoOverlayInfo"></div>
+          </div>
+
+          <div class="tab-nav" id="tabNavigation">
+            <button
+              class="tab-btn active"
+              onclick="manualTabSwitch(0)"
+              data-tab="0"
+            >
+              🏆 Live Standings
+              <div class="timer-bar"></div>
+            </button>
+            <button class="tab-btn" onclick="manualTabSwitch(1)" data-tab="1">
+              📊 Points Breakdown
+              <div class="timer-bar"></div>
+            </button>
+            <button class="tab-btn" onclick="manualTabSwitch(2)" data-tab="2">
+              📋 Event Status
+              <div class="timer-bar"></div>
+            </button>
+            <button class="tab-btn" onclick="manualTabSwitch(3)" data-tab="3">
+              📜 Score History
+              <div class="timer-bar"></div>
+            </button>
+            <button class="tab-btn" onclick="manualTabSwitch(4)" data-tab="4">
+              🏅 Individual Rankings
+              <div class="timer-bar"></div>
+            </button>
+          </div>
+
+          <div class="tab-content active" id="tab-0">
+            <div class="section-title">Current Standings</div>
+            <div class="houses-podium" id="standingsContent">
+              <div class="empty-state">
+                <div class="empty-state-icon">🏊</div>
+                <h3>No scores yet</h3>
+                <p>Click on events in the Event Status tab to enter scores</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="tab-1">
+            <div class="section-title">Points Breakdown by House</div>
+            <div class="breakdown-grid" id="breakdownContent">
+              <div class="empty-state" style="grid-column: 1/-1">
+                <div class="empty-state-icon">📊</div>
+                <h3>No data available</h3>
+                <p>Complete events to see detailed breakdowns</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="tab-2">
+            <div class="section-title">Event Management & Scoring</div>
+            <div class="tabs" style="margin-bottom: 20px">
+              <button class="subtab active" onclick="switchEventView('day1')">
+                Day 1: Mar 31 (Grade 1-4)
+              </button>
+              <button class="subtab" onclick="switchEventView('day2')">
+                Day 2: Apr 1 (Grade 5-9)
+              </button>
+            </div>
+            <div id="eventsContent" class="events-grid">
+              <div class="empty-state" style="grid-column: 1/-1">
+                <div class="empty-state-icon">📋</div>
+                <h3>Loading events...</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="tab-3">
+            <div class="section-title">Recent Score Updates</div>
+            <div class="history-list" id="historyContent">
+              <div class="empty-state">
+                <div class="empty-state-icon">📜</div>
+                <h3>No history yet</h3>
+                <p>Score updates will be recorded here</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="tab-4">
+            <div class="section-title">Individual Swimmer Rankings</div>
+            <div
+              class="ranking-filters"
+              style="
+                margin-bottom: 20px;
+                display: flex;
+                gap: 15px;
+                flex-wrap: wrap;
+              "
+            >
+              <select
+                id="rankingCategoryFilter"
+                onchange="renderIndividualRankings()"
+                style="
+                  padding: 8px 15px;
+                  border: 2px solid #e2e8f0;
+                  border-radius: 8px;
+                  font-size: 0.9rem;
+                "
+              >
+                <option value="all">All Categories</option>
+                <option value="Grade 1-2">Grade 1-2</option>
+                <option value="Grade 3-4">Grade 3-4</option>
+                <option value="Grade 5-6">Grade 5-6</option>
+                <option value="Grade 7-9">Grade 7-9</option>
+              </select>
+              <select
+                id="rankingHouseFilter"
+                onchange="renderIndividualRankings()"
+                style="
+                  padding: 8px 15px;
+                  border: 2px solid #e2e8f0;
+                  border-radius: 8px;
+                  font-size: 0.9rem;
+                "
+              >
+                <option value="all">All Houses</option>
+              </select>
+              <select
+                id="rankingEventFilter"
+                onchange="renderIndividualRankings()"
+                style="
+                  padding: 8px 15px;
+                  border: 2px solid #e2e8f0;
+                  border-radius: 8px;
+                  font-size: 0.9rem;
+                "
+              >
+                <option value="all">All Events</option>
+              </select>
+            </div>
+            <div
+              class="individual-rankings-grid"
+              id="individualRankingsContent"
+            >
+              <div class="empty-state">
+                <div class="empty-state-icon">🏅</div>
+                <h3>No individual data yet</h3>
+                <p>
+                  Enter swimmer times to see individual rankings by event and
+                  category
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-sidebar" id="videoSidebar">
+          <div class="add-video-btn" onclick="focusVideoInput()">
+            + Add Video Stream
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-hint">Press Ctrl+Shift+M for admin</div>
+
+    <script>
+      // Data Management with Event Structure
+      let appData = {
+        houses: {
+          Tsavo: { color: "#e53e3e", id: "tsavo" },
+          Amboseli: { color: "#38a169", id: "amboseli" },
+          Aberdare: { color: "#3182ce", id: "aberdare" },
+          Mara: { color: "#d69e2e", id: "mara" },
+          Samburu: { color: "#805ad5", id: "samburu" },
+        },
+        participants: [],
+        events: [],
+        videos: [],
+        scores: {},
+        history: [],
+        settings: {
+          rotationInterval: 10,
+          videoDuration: 30,
+          leaderboardCycles: 3,
+          autoRotate: true,
+        },
+      };
+
+      // Pre-configured events
+      const defaultEvents = [
+        {
+          id: "D1-E1",
+          name: "25m Free",
+          category: "Grade 1-2",
+          day: "Mar 31",
+          group: "Grade 1-4",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D1-E2",
+          name: "25m Free",
+          category: "Grade 3-4",
+          day: "Mar 31",
+          group: "Grade 1-4",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D1-E3",
+          name: "25m Breast",
+          category: "Grade 1-2",
+          day: "Mar 31",
+          group: "Grade 1-4",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D1-E4",
+          name: "25m Breast",
+          category: "Grade 3-4",
+          day: "Mar 31",
+          group: "Grade 1-4",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D1-E5",
+          name: "25m Back",
+          category: "Grade 1-4 Open",
+          day: "Mar 31",
+          group: "Grade 1-4",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D1-E6",
+          name: "25m Fly",
+          category: "Grade 1-4 Open",
+          day: "Mar 31",
+          group: "Grade 1-4",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D1-E7",
+          name: "50m Free",
+          category: "Grade 3-4",
+          day: "Mar 31",
+          group: "Grade 1-4",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D1-E8",
+          name: "50m Breast",
+          category: "Grade 3-4",
+          day: "Mar 31",
+          group: "Grade 1-4",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D1-E9",
+          name: "50m Back",
+          category: "Grade 1-4 Open",
+          day: "Mar 31",
+          group: "Grade 1-4",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D1-E10",
+          name: "50m Fly",
+          category: "Grade 1-4 Open",
+          day: "Mar 31",
+          group: "Grade 1-4",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D1-E11",
+          name: "4x25m Freestyle Relay",
+          category: "Grade 1-2",
+          day: "Mar 31",
+          group: "Grade 1-4",
+          type: "relay",
+          completed: false,
+        },
+        {
+          id: "D1-E12",
+          name: "4x25m Freestyle Relay",
+          category: "Grade 3-4",
+          day: "Mar 31",
+          group: "Grade 1-4",
+          type: "relay",
+          completed: false,
+        },
+        {
+          id: "D1-E13",
+          name: "4x25m Mixed Relay",
+          category: "Grade 1-4 Open",
+          day: "Mar 31",
+          group: "Grade 1-4",
+          type: "relay",
+          completed: false,
+        },
+        {
+          id: "D2-E1",
+          name: "100m IM",
+          category: "Grade 7-9",
+          day: "Apr 1",
+          group: "Grade 7-9",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D2-E2",
+          name: "50m Fly",
+          category: "Grade 5&6",
+          day: "Apr 1",
+          group: "Grade 5-6",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D2-E3",
+          name: "50m Fly",
+          category: "Grade 7-9",
+          day: "Apr 1",
+          group: "Grade 7-9",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D2-E4",
+          name: "50m Back",
+          category: "Grade 5&6",
+          day: "Apr 1",
+          group: "Grade 5-6",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D2-E5",
+          name: "50m Back",
+          category: "Grade 7-9",
+          day: "Apr 1",
+          group: "Grade 7-9",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D2-E6",
+          name: "50m Breast",
+          category: "Grade 5&6",
+          day: "Apr 1",
+          group: "Grade 5-6",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D2-E7",
+          name: "50m Breast",
+          category: "Grade 7-9",
+          day: "Apr 1",
+          group: "Grade 7-9",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D2-E8",
+          name: "50m Free",
+          category: "Grade 5&6",
+          day: "Apr 1",
+          group: "Grade 5-6",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D2-E9",
+          name: "50m Free",
+          category: "Grade 7-9",
+          day: "Apr 1",
+          group: "Grade 7-9",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D2-E10",
+          name: "25m Free",
+          category: "Grade 5&6",
+          day: "Apr 1",
+          group: "Grade 5-6",
+          type: "individual",
+          completed: false,
+        },
+        {
+          id: "D2-E11",
+          name: "4x25m Medley Relay",
+          category: "Grade 7-9",
+          day: "Apr 1",
+          group: "Grade 7-9",
+          type: "relay",
+          completed: false,
+        },
+        {
+          id: "D2-E12",
+          name: "4x25m Freestyle Relay",
+          category: "Grade 5&6",
+          day: "Apr 1",
+          group: "Grade 5-6",
+          type: "relay",
+          completed: false,
+        },
+        {
+          id: "D2-E13",
+          name: "4x25m Mixed Freestyle Relay",
+          category: "Grade 7-9",
+          day: "Apr 1",
+          group: "Grade 7-9",
+          type: "relay",
+          completed: false,
+        },
+        {
+          id: "D2-E14",
+          name: "4x25m Mixed Freestyle Relay",
+          category: "Grade 5&6",
+          day: "Apr 1",
+          group: "Grade 5-6",
+          type: "relay",
+          completed: false,
+        },
+      ];
+
+      let currentTab = 0;
+      let currentEventView = "day1";
+      let scoringEventId = null;
+      const tabs = [
+        "standings",
+        "breakdown",
+        "events",
+        "history",
+        "individual",
+      ];
+
+      // Phase management
+      let currentPhase = "leaderboard"; // 'leaderboard' or 'video'
+      let cycleCount = 0;
+      let videoIndex = 0;
+      let rotationTimer = null;
+      let progressTimer = null;
+      let phaseTimer = null;
+
+      // Scoring System
+      // Individual: 1st=7, 2nd=5, 3rd=4, 4th=3, 5th=2, 6th=1
+      // Relay: 1st=14, 2nd=10, 3rd=8, 4th=6, 5th=4, 6th=2 (double individual)
+      const scoringSystem = {
+        individual: { 1: 7, 2: 5, 3: 4, 4: 3, 5: 2, 6: 1 },
+        relay: { 1: 14, 2: 10, 3: 8, 4: 6, 5: 4, 6: 2 },
+      };
+
+      // Initialize
+      function init() {
+        loadFromStorage();
+        checkPublicView();
+
+        if (appData.events.length === 0) {
+          appData.events = JSON.parse(JSON.stringify(defaultEvents));
+        }
+
+        renderHousesList();
+        renderParticipantsList();
+        renderParticipantHouseSelect();
+        renderVideos();
+        renderStandings();
+        renderBreakdown();
+        renderEvents();
+        renderHistory();
+        renderEventManagementLists();
+
+        if (!isPublicView()) {
+          startRotation();
+        }
+
+        setupAdminShortcut();
+
+        // Setup Firebase sync (wait for Firebase to load)
+        setTimeout(() => {
+          setupFirebaseListener();
+        }, 2000);
+      }
+
+      function loadFromStorage() {
+        const saved = localStorage.getItem("mvsGala2026");
+        if (saved) {
+          try {
+            appData = JSON.parse(saved);
+          } catch (e) {
+            console.error("Failed to load data");
+          }
+        }
+      }
+
+      function saveToStorage() {
+        localStorage.setItem("mvsGala2026", JSON.stringify(appData));
+      }
+
+      // Firebase Sync Functions
+      function syncToFirebase() {
+        if (!window.db || !window.firebaseRefs) return;
+
+        const { set, ref } = window.firebaseRefs;
+        const galaRef = ref(window.db, "gala/data");
+
+        set(galaRef, appData)
+          .then(() => console.log("Synced to Firebase"))
+          .catch((err) => console.error("Firebase sync error:", err));
+      }
+
+      function setupFirebaseListener() {
+        if (!window.db || !window.firebaseRefs) {
+          console.log("Firebase not initialized");
+          return;
+        }
+
+        const { onValue, ref } = window.firebaseRefs;
+        const galaRef = ref(window.db, "gala/data");
+
+        onValue(galaRef, (snapshot) => {
+          const data = snapshot.val();
+          if (data) {
+            // Only update if data is different (avoid loops)
+            const currentData = JSON.stringify(appData);
+            const newData = JSON.stringify(data);
+
+            if (currentData !== newData) {
+              appData = data;
+              saveToStorage();
+              renderAll();
+              console.log("Updated from Firebase");
+            }
+          }
+        });
+      }
+
+      function renderAll() {
+        renderStandings();
+        renderBreakdown();
+        renderEvents();
+        renderHistory();
+        renderIndividualRankings();
+        renderVideos();
+        renderHousesList();
+        renderParticipantsList();
+        renderParticipantHouseSelect();
+        renderEventManagementLists();
+      }
+
+      // Public View & Security
+      function checkPublicView() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const view = urlParams.get("view");
+        const token = urlParams.get("t");
+
+        if (view === "public" && token) {
+          // Validate token (24 hour expiry)
+          const timestamp = parseInt(atob(token));
+          const now = Date.now();
+          const hours24 = 24 * 60 * 60 * 1000;
+
+          if (now - timestamp > hours24) {
+            document.body.innerHTML = `
+                        <div class="expired-notice">
+                            <h2>🔗 Link Expired</h2>
+                            <p>This viewing link has expired. Please request a new QR code from the event administrator.</p>
+                            <p style="margin-top: 20px; font-size: 0.9rem; color: #718096;">
+                                Mountain View School Swimming Gala 2026
+                            </p>
+                        </div>
+                    `;
+            return;
+          }
+
+          document.body.classList.add("public-view");
+          document.getElementById("settingsBtn").classList.add("hidden");
+        }
+      }
+
+      function isPublicView() {
+        return document.body.classList.contains("public-view");
+      }
+
+      function generatePublicLink() {
+        const timestamp = Date.now();
+        const token = btoa(timestamp.toString());
+        const baseUrl = window.location.href.split("?")[0];
+        const publicUrl = `${baseUrl}?view=public&t=${token}`;
+
+        document.getElementById("publicLink").textContent = publicUrl;
+
+        // Clear previous QR
+        const qrContainer = document.getElementById("qrcode");
+        qrContainer.innerHTML = "";
+
+        // Generate new QR
+        new QRCode(qrContainer, {
+          text: publicUrl,
+          width: 200,
+          height: 200,
+          colorDark: "#1e3a5f",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.M,
+        });
+
+        // Store in session that we generated a link (for admin reference)
+        sessionStorage.setItem("lastPublicToken", token);
+      }
+
+      // Admin Access Control
+      let logoClickCount = 0;
+      let logoClickTimer = null;
+
+      function handleLogoClick() {
+        logoClickCount++;
+        if (logoClickTimer) clearTimeout(logoClickTimer);
+
+        if (logoClickCount >= 3) {
+          revealAdmin();
+          logoClickCount = 0;
+        } else {
+          logoClickTimer = setTimeout(() => {
+            logoClickCount = 0;
+          }, 1000);
+        }
+      }
+
+      function setupAdminShortcut() {
+        document.addEventListener("keydown", function (e) {
+          if (e.ctrlKey && e.shiftKey && e.key === "M") {
+            e.preventDefault();
+            revealAdmin();
+          }
+          // Press 'P' to toggle admin button visibility (from gala.html)
+          if (e.key === "p" || e.key === "P") {
+            toggleAdminVisibility();
+          }
+        });
+      }
+
+      function toggleAdminVisibility() {
+        const btn = document.getElementById("settingsBtn");
+        if (btn) {
+          btn.classList.toggle("hidden");
+        }
+      }
+
+      function revealAdmin() {
+        const btn = document.getElementById("settingsBtn");
+        btn.classList.remove("hidden");
+        btn.style.animation = "pulse 0.5s ease 3";
+        setTimeout(() => {
+          btn.style.animation = "";
+        }, 1500);
+      }
+
+      // Video URL Parsing
+      function parseVideoUrl(url) {
+        if (!url) return null;
+
+        // YouTube Standard
+        if (url.includes("youtube.com/watch")) {
+          const match = url.match(/v=([a-zA-Z0-9_-]+)/);
+          if (match)
+            return `https://www.youtube.com/embed/${match[1]}?autoplay=1&mute=1&rel=0`;
+        }
+
+        // YouTube Shorts
+        if (url.includes("youtube.com/shorts/")) {
+          const match = url.match(/shorts\/([a-zA-Z0-9_-]+)/);
+          if (match)
+            return `https://www.youtube.com/embed/${match[1]}?autoplay=1&mute=1&rel=0`;
+        }
+
+        // YouTube Short URL
+        if (url.includes("youtu.be/")) {
+          const match = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+          if (match)
+            return `https://www.youtube.com/embed/${match[1]}?autoplay=1&mute=1&rel=0`;
+        }
+
+        // Instagram - NOT SUPPORTED (requires login)
+        // Instagram embeds are blocked and require authentication
+        // Use YouTube, Google Drive, or direct video files instead
+
+        // Google Drive
+        if (url.includes("drive.google.com/file/d/")) {
+          const match = url.match(/file\/d\/([a-zA-Z0-9_-]+)/);
+          if (match)
+            return `https://drive.google.com/file/d/${match[1]}/preview`;
+        }
+
+        // Direct video file
+        if (url.match(/\.(mp4|webm|ogg)$/i)) {
+          return url;
+        }
+
+        return url; // Return as-is if no pattern matched
+      }
+
+      function handleLocalVideo(input) {
+        const file = input.files[0];
+        if (file) {
+          const url = URL.createObjectURL(file);
+          document.getElementById("videoUrl").value = url;
+        }
+      }
+
+      // Phase Management (Leaderboard vs Video)
+      function startRotation() {
+        if (!appData.settings.autoRotate || isPublicView()) return;
+
+        clearTimers();
+        currentPhase = "leaderboard";
+        cycleCount = 0;
+        updatePhaseIndicator();
+
+        runLeaderboardPhase();
+      }
+
+      function clearTimers() {
+        if (rotationTimer) clearInterval(rotationTimer);
+        if (progressTimer) clearInterval(progressTimer);
+        if (phaseTimer) clearTimeout(phaseTimer);
+      }
+
+      function runLeaderboardPhase() {
+        currentPhase = "leaderboard";
+        updatePhaseIndicator();
+
+        const interval = appData.settings.rotationInterval * 1000;
+        let progress = 0;
+        const increment = 100 / (appData.settings.rotationInterval * 10);
+
+        // Reset tabs visibility
+        document.getElementById("videoShowcase").classList.remove("active");
+        document.getElementById("tabNavigation").style.display = "flex";
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((c) => (c.style.display = "none"));
+        document.getElementById(`tab-${currentTab}`).style.display = "block";
+
+        // Immediate first render
+        resetTimerBar();
+
+        progressTimer = setInterval(() => {
+          progress += increment;
+          const bar = document.querySelector(".tab-btn.active .timer-bar");
+          if (bar) bar.style.width = progress + "%";
+
+          if (progress >= 100) {
+            progress = 0;
+            switchTab((currentTab + 1) % 5);
+
+            // Check if completed a full cycle (5 tabs)
+            if (currentTab === 0) {
+              cycleCount++;
+              if (cycleCount >= appData.settings.leaderboardCycles) {
+                clearTimers();
+                runVideoPhase();
+              }
+            }
+          }
+        }, 100);
+      }
+
+      function runVideoPhase() {
+        if (appData.videos.length === 0) {
+          // No videos, return to leaderboard
+          cycleCount = 0;
+          runLeaderboardPhase();
+          return;
+        }
+
+        currentPhase = "video";
+        cycleCount = 0;
+        videoIndex = 0;
+        updatePhaseIndicator();
+
+        // Hide tabs, show video
+        document.getElementById("tabNavigation").style.display = "none";
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((c) => (c.style.display = "none"));
+        document.getElementById("videoShowcase").classList.add("active");
+
+        showCurrentVideo();
+
+        const videoDuration = (appData.settings.videoDuration || 30) * 1000;
+
+        phaseTimer = setInterval(() => {
+          videoIndex++;
+          if (videoIndex >= appData.videos.length) {
+            clearInterval(phaseTimer);
+            runLeaderboardPhase(); // Return to leaderboard
+          } else {
+            showCurrentVideo();
+          }
+        }, videoDuration);
+      }
+
+      function showCurrentVideo() {
+        const video = appData.videos[videoIndex];
+        if (!video) return;
+
+        const container = document.getElementById("videoShowcaseContainer");
+        const info = document.getElementById("videoOverlayInfo");
+
+        let embedHtml = "";
+        if (
+          video.url.includes(".mp4") ||
+          video.url.includes(".webm") ||
+          video.url.includes("blob:")
+        ) {
+          embedHtml = `<video src="${video.url}" autoplay muted playsinline controls style="max-width: 100%; max-height: 100%;"></video>`;
+        } else {
+          // Ensure autoplay params are in URL
+          let embedUrl = video.url;
+          if (
+            embedUrl.includes("youtube.com/embed") &&
+            !embedUrl.includes("autoplay=")
+          ) {
+            embedUrl +=
+              (embedUrl.includes("?") ? "&" : "?") + "autoplay=1&mute=1&rel=0";
+          }
+          embedHtml = `<iframe src="${embedUrl}" allowfullscreen frameborder="0" allow="autoplay; encrypted-media" style="width: 100%; height: 100%;"></iframe>`;
+        }
+
+        container.innerHTML = embedHtml;
+        info.textContent = `🎥 ${video.title} (${videoIndex + 1}/${appData.videos.length})`;
+      }
+
+      function updatePhaseIndicator() {
+        const indicator = document.getElementById("phaseIndicator");
+        if (currentPhase === "leaderboard") {
+          indicator.textContent = `Leaderboard Mode (Cycle ${cycleCount + 1}/${appData.settings.leaderboardCycles})`;
+        } else {
+          indicator.textContent = `Video Mode (${videoIndex + 1}/${appData.videos.length})`;
+        }
+        indicator.classList.add("active");
+      }
+
+      function resetTimerBar() {
+        document
+          .querySelectorAll(".timer-bar")
+          .forEach((bar) => (bar.style.width = "0%"));
+      }
+
+      // Tab Management
+      function switchTab(index) {
+        currentTab = index;
+
+        document.querySelectorAll(".tab-btn").forEach((btn, i) => {
+          btn.classList.toggle("active", i === index);
+        });
+
+        document.querySelectorAll(".tab-content").forEach((content, i) => {
+          content.classList.toggle("active", i === index);
+          content.style.display = i === index ? "block" : "none";
+        });
+
+        resetTimerBar();
+      }
+
+      function manualTabSwitch(index) {
+        // User manually clicked - reset rotation but stay in phase
+        clearTimers();
+        switchTab(index);
+        if (currentPhase === "leaderboard" && !isPublicView()) {
+          runLeaderboardPhase();
+        }
+      }
+
+      // Settings Panel
+      function toggleSettings() {
+        const panel = document.getElementById("settingsPanel");
+        panel.classList.toggle("open");
+
+        if (panel.classList.contains("open")) {
+          renderHousesList();
+          renderParticipantsList();
+          renderEventManagementLists();
+        }
+      }
+
+      function closeSettings() {
+        document.getElementById("settingsPanel").classList.remove("open");
+      }
+
+      // House Management
+      function renderHousesList() {
+        const container = document.getElementById("housesList");
+        container.innerHTML = Object.entries(appData.houses)
+          .map(
+            ([name, data]) => `
+                    <div class="house-editor">
+                        <input type="text" value="${name}" onchange="updateHouseName('${name}', this.value)" placeholder="House Name">
+                        <div class="color-picker-wrapper" style="background: ${data.color};">
+                            <input type="color" value="${data.color}" onchange="updateHouseColor('${name}', this.value)">
+                        </div>
+                        <button class="btn btn-danger" onclick="removeHouse('${name}')" style="padding: 8px;">🗑️</button>
+                    </div>
+                `,
+          )
+          .join("");
+      }
+
+      function addHouse() {
+        const name = prompt("Enter new house name:");
+        if (name && !appData.houses[name]) {
+          const colors = [
+            "#e53e3e",
+            "#38a169",
+            "#3182ce",
+            "#d69e2e",
+            "#805ad5",
+            "#dd6b20",
+            "#38b2ac",
+            "#667eea",
+          ];
+          const randomColor =
+            colors[Object.keys(appData.houses).length % colors.length];
+          appData.houses[name] = {
+            color: randomColor,
+            id: name.toLowerCase().replace(/\s+/g, "-"),
+          };
+          saveToStorage();
+          renderHousesList();
+          renderParticipantHouseSelect();
+        }
+      }
+
+      function updateHouseName(oldName, newName) {
+        if (oldName === newName) return;
+        if (appData.houses[newName]) {
+          alert("House name already exists!");
+          return;
+        }
+        appData.houses[newName] = appData.houses[oldName];
+        delete appData.houses[oldName];
+
+        appData.participants.forEach((p) => {
+          if (p.house === oldName) p.house = newName;
+        });
+
+        Object.keys(appData.scores).forEach((eventId) => {
+          if (appData.scores[eventId][oldName]) {
+            appData.scores[eventId][newName] = appData.scores[eventId][oldName];
+            delete appData.scores[eventId][oldName];
+          }
+        });
+
+        saveToStorage();
+        renderStandings();
+        renderEvents();
+      }
+
+      function updateHouseColor(name, color) {
+        appData.houses[name].color = color;
+        saveToStorage();
+        renderStandings();
+        renderEvents();
+      }
+
+      function removeHouse(name) {
+        if (Object.keys(appData.houses).length <= 2) {
+          alert("You must have at least 2 houses!");
+          return;
+        }
+        if (confirm(`Remove ${name} house?`)) {
+          delete appData.houses[name];
+          appData.participants.forEach((p) => {
+            if (p.house === name) p.house = "Unassigned";
+          });
+          saveToStorage();
+          renderHousesList();
+          renderStandings();
+        }
+      }
+
+      // Participant Management
+      function renderParticipantHouseSelect() {
+        const select = document.getElementById("participantHouse");
+        select.innerHTML = Object.keys(appData.houses)
+          .map((h) => `<option value="${h}">${h}</option>`)
+          .join("");
+      }
+
+      function addParticipant() {
+        const name = document.getElementById("participantName").value.trim();
+        const house = document.getElementById("participantHouse").value;
+
+        if (!name) {
+          alert("Please enter a participant name");
+          return;
+        }
+
+        appData.participants.push({
+          id: Date.now(),
+          name,
+          house,
+          added: new Date().toLocaleString(),
+        });
+
+        document.getElementById("participantName").value = "";
+        saveToStorage();
+        renderParticipantsList();
+      }
+
+      function removeParticipant(id) {
+        appData.participants = appData.participants.filter((p) => p.id !== id);
+        saveToStorage();
+        renderParticipantsList();
+      }
+
+      function renderParticipantsList() {
+        const container = document.getElementById("participantsList");
+        if (appData.participants.length === 0) {
+          container.innerHTML =
+            '<p style="text-align: center; color: #a0aec0; padding: 20px;">No participants added yet</p>';
+          return;
+        }
+
+        container.innerHTML = appData.participants
+          .map(
+            (p) => `
+                    <div class="participant-item">
+                        <div class="participant-info">
+                            <span class="participant-name">${p.name}</span>
+                            <span class="participant-house" style="color: ${appData.houses[p.house]?.color || "#999"};">
+                                ${p.house}
+                            </span>
+                        </div>
+                        <button class="btn btn-danger" onclick="removeParticipant(${p.id})" style="padding: 5px 10px; font-size: 0.8rem;">Remove</button>
+                    </div>
+                `,
+          )
+          .join("");
+      }
+
+      // Event Management
+      function renderEventManagementLists() {
+        const day1Container = document.getElementById("day1EventList");
+        const day2Container = document.getElementById("day2EventList");
+
+        const day1Events = appData.events.filter((e) => e.day === "Mar 31");
+        const day2Events = appData.events.filter((e) => e.day === "Apr 1");
+
+        day1Container.innerHTML = day1Events
+          .map((event) => createEventEditorHTML(event))
+          .join("");
+        day2Container.innerHTML = day2Events
+          .map((event) => createEventEditorHTML(event))
+          .join("");
+      }
+
+      function createEventEditorHTML(event) {
+        return `
+                <div class="event-item">
+                    <input type="text" value="${event.id}" disabled style="font-size: 0.8rem; font-weight: 600;">
+                    <input type="text" value="${event.name}" onchange="updateEvent('${event.id}', 'name', this.value)">
+                    <input type="text" value="${event.category}" onchange="updateEvent('${event.id}', 'category', this.value)">
+                    <select onchange="updateEvent('${event.id}', 'type', this.value)">
+                        <option value="individual" ${event.type === "individual" ? "selected" : ""}>Individual</option>
+                        <option value="relay" ${event.type === "relay" ? "selected" : ""}>Relay</option>
+                    </select>
+                    <button class="btn btn-danger" onclick="removeEvent('${event.id}')" style="padding: 8px;">🗑️</button>
+                </div>
+            `;
+      }
+
+      function addEvent(day) {
+        const id = prompt("Enter event ID (e.g., D1-E15):");
+        if (!id) return;
+
+        const name = prompt("Enter event name (e.g., 100m Freestyle):");
+        if (!name) return;
+
+        const category = prompt("Enter category (e.g., Grade 7-9):");
+        if (!category) return;
+
+        const type = confirm(
+          "Is this a relay event?\\n\\nOK = Relay, Cancel = Individual",
+        )
+          ? "relay"
+          : "individual";
+
+        appData.events.push({
+          id,
+          name,
+          category,
+          day: day === "day1" ? "Mar 31" : "Apr 1",
+          group:
+            day === "day1"
+              ? "Grade 1-4"
+              : category.includes("7-9")
+                ? "Grade 7-9"
+                : "Grade 5-6",
+          type,
+          completed: false,
+        });
+
+        saveToStorage();
+        renderEventManagementLists();
+        renderEvents();
+      }
+
+      function updateEvent(id, field, value) {
+        const event = appData.events.find((e) => e.id === id);
+        if (event) {
+          event[field] = value;
+          saveToStorage();
+          renderEvents();
+        }
+      }
+
+      function removeEvent(id) {
+        if (confirm("Remove this event?")) {
+          appData.events = appData.events.filter((e) => e.id !== id);
+          delete appData.scores[id];
+          saveToStorage();
+          renderEventManagementLists();
+          renderEvents();
+          renderStandings();
+        }
+      }
+
+      // Event View Switching
+      function switchEventView(day) {
+        currentEventView = day;
+        document.querySelectorAll("#tab-2 .subtab").forEach((btn) => {
+          btn.classList.toggle(
+            "active",
+            btn.textContent.includes(day === "day1" ? "Mar 31" : "Apr 1"),
+          );
+        });
+        renderEvents();
+      }
+
+      function switchEventTab(day) {
+        document.querySelectorAll(".subtab").forEach((btn, i) => {
+          btn.classList.toggle(
+            "active",
+            (day === "day1" && i === 0) || (day === "day2" && i === 1),
+          );
+        });
+        document.querySelectorAll(".day-section").forEach((section, i) => {
+          section.classList.toggle(
+            "active",
+            (day === "day1" && i === 0) || (day === "day2" && i === 1),
+          );
+        });
+        renderEventManagementLists();
+      }
+
+      // Video Management
+      function focusVideoInput() {
+        toggleSettings();
+        document.getElementById("videoTitle").focus();
+      }
+
+      function addVideo() {
+        const title = document.getElementById("videoTitle").value.trim();
+        let url = document.getElementById("videoUrl").value.trim();
+
+        if (!title || !url) {
+          alert("Please enter both title and URL");
+          return;
+        }
+
+        // Parse URL for various platforms
+        const parsedUrl = parseVideoUrl(url);
+        if (!parsedUrl) {
+          alert("Invalid video URL");
+          return;
+        }
+
+        appData.videos.push({
+          id: Date.now(),
+          title,
+          url: parsedUrl,
+          originalUrl: url,
+          added: new Date().toLocaleString(),
+        });
+
+        document.getElementById("videoTitle").value = "";
+        document.getElementById("videoUrl").value = "";
+        document.getElementById("videoFile").value = "";
+        saveToStorage();
+        renderVideos();
+      }
+
+      function removeVideo(id) {
+        appData.videos = appData.videos.filter((v) => v.id !== id);
+        saveToStorage();
+        renderVideos();
+      }
+
+      function renderVideos() {
+        const container = document.getElementById("videoSidebar");
+
+        let html = appData.videos
+          .map(
+            (video) => `
+                <div class="video-card">
+                    <div class="video-container">
+                        ${
+                          video.url.includes(".mp4") ||
+                          video.url.includes(".webm") ||
+                          video.url.includes("blob:")
+                            ? `<video src="${video.url}" controls style="width: 100%; height: 100%;"></video>`
+                            : `<iframe src="${video.url}" allowfullscreen></iframe>`
+                        }
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">${video.title}</div>
+                        <div class="video-meta">
+                            <span>Added ${video.added}</span>
+                            <button onclick="removeVideo(${video.id})" style="background: none; border: none; color: #fc8181; cursor: pointer; font-size: 0.8rem;">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            `,
+          )
+          .join("");
+
+        html += `<div class="add-video-btn" onclick="focusVideoInput()">+ Add Video Stream</div>`;
+        container.innerHTML = html;
+      }
+
+      // Scoring Interface
+      // Time Entry Scoring System
+      let tempTimes = {};
+
+      function openScoring(eventId) {
+        scoringEventId = eventId;
+        const event = appData.events.find((e) => e.id === eventId);
+        if (!event) return;
+
+        document.getElementById("scoringEventTitle").textContent = event.name;
+        document.getElementById("scoringEventDetails").textContent =
+          `${event.category} • ${event.day} • ${event.type === "relay" ? "Relay" : "Individual"}`;
+
+        const container = document.getElementById("houseScoringInputs");
+        const currentScores = appData.scores[eventId] || {};
+
+        // Reset temp times
+        tempTimes[scoringEventId] = {};
+
+        container.innerHTML = Object.keys(appData.houses)
+          .map((house) => {
+            const existingTime = currentScores[house]?.time || "";
+            return `
+                    <div class="score-input">
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                            <label style="color: ${appData.houses[house].color}; font-weight: 700; font-size: 1.1rem;">${house}</label>
+                            <div style="display: flex; gap: 6px; align-items: center;">
+                                <input type="number" 
+                                       id="time-min-${house}" 
+                                       placeholder="MM" 
+                                       min="0" max="99"
+                                       value="${existingTime ? Math.floor(existingTime / 60) : ""}"
+                                       onchange="updateTimeEntry('${house}')"
+                                       style="width: 55px; padding: 8px 5px; border: 2px solid #e2e8f0; border-radius: 6px; text-align: center; font-size: 1rem;"
+                                       title="Minutes">
+                                <span style="font-weight: 700; color: #4a5568;">:</span>
+                                <input type="number" 
+                                       id="time-sec-${house}" 
+                                       placeholder="SS" 
+                                       min="0" max="59"
+                                       value="${existingTime ? Math.floor(existingTime % 60) : ""}"
+                                       onchange="updateTimeEntry('${house}')"
+                                       style="width: 55px; padding: 8px 5px; border: 2px solid #e2e8f0; border-radius: 6px; text-align: center; font-size: 1rem;"
+                                       title="Seconds">
+                                <span style="font-weight: 700; color: #4a5568;">.</span>
+                                <input type="number" 
+                                       id="time-ms-${house}" 
+                                       placeholder="00" 
+                                       min="0" max="99"
+                                       value="${
+                                         existingTime
+                                           ? Math.round(
+                                               (existingTime % 1) * 100,
+                                             )
+                                               .toString()
+                                               .padStart(2, "0")
+                                           : ""
+                                       }"
+                                       onchange="updateTimeEntry('${house}')"
+                                       style="width: 55px; padding: 8px 5px; border: 2px solid #e2e8f0; border-radius: 6px; text-align: center; font-size: 1rem;"
+                                       title="Hundredths">
+                                <label style="display: flex; align-items: center; gap: 4px; margin-left: 8px; cursor: pointer; background: white; padding: 6px 10px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                                    <input type="checkbox" id="dns-${house}" onchange="toggleDNS('${house}')" style="cursor: pointer;">
+                                    <span style="font-size: 0.8rem; color: #718096; white-space: nowrap;">DNS/DNF</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                `;
+          })
+          .join("");
+
+        document.getElementById("scoringInterface").classList.add("open");
+        document.querySelector(".overlay").classList.add("show");
+      }
+
+      function closeScoring() {
+        document.getElementById("scoringInterface").classList.remove("open");
+        document.querySelector(".overlay").classList.remove("show");
+        document.getElementById("rankingPreview").style.display = "none";
+        scoringEventId = null;
+      }
+
+      function updateTimeEntry(house) {
+        const min =
+          parseInt(document.getElementById(`time-min-${house}`).value) || 0;
+        const sec =
+          parseInt(document.getElementById(`time-sec-${house}`).value) || 0;
+        const ms =
+          parseInt(document.getElementById(`time-ms-${house}`).value) || 0;
+
+        // Convert to total seconds
+        const totalTime = min * 60 + sec + ms / 100;
+
+        if (totalTime > 0) {
+          tempTimes[scoringEventId][house] = totalTime;
+        } else {
+          delete tempTimes[scoringEventId][house];
+        }
+
+        updateRankingPreview();
+      }
+
+      function toggleDNS(house) {
+        const checkbox = document.getElementById(`dns-${house}`);
+        const minInput = document.getElementById(`time-min-${house}`);
+        const secInput = document.getElementById(`time-sec-${house}`);
+        const msInput = document.getElementById(`time-ms-${house}`);
+
+        if (checkbox.checked) {
+          // Did Not Start / Did Not Finish
+          tempTimes[scoringEventId][house] = -1; // Special marker
+          minInput.disabled = true;
+          secInput.disabled = true;
+          msInput.disabled = true;
+          minInput.value = "";
+          secInput.value = "";
+          msInput.value = "";
+        } else {
+          delete tempTimes[scoringEventId][house];
+          minInput.disabled = false;
+          secInput.disabled = false;
+          msInput.disabled = false;
+        }
+
+        updateRankingPreview();
+      }
+
+      function updateRankingPreview() {
+        const times = tempTimes[scoringEventId] || {};
+        const validEntries = Object.entries(times).filter(
+          ([house, time]) => time > 0,
+        );
+
+        if (validEntries.length === 0) {
+          document.getElementById("rankingPreview").style.display = "none";
+          return;
+        }
+
+        // Sort by time (fastest first)
+        const sorted = validEntries.sort((a, b) => a[1] - b[1]);
+
+        const rankingHtml = sorted
+          .map(([house, time], index) => {
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60);
+            const ms = Math.round((time % 1) * 100);
+            const timeStr = `${minutes}:${seconds.toString().padStart(2, "0")}.${ms.toString().padStart(2, "0")}`;
+            const points = scoringSystem.individual[index + 1] || 0;
+            const rank = index + 1;
+            const medal =
+              rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : "";
+
+            return `<div style="margin-bottom: 3px;">${medal} <strong>${rank}.</strong> ${house} - ${timeStr} (${points} pts)</div>`;
+          })
+          .join("");
+
+        document.getElementById("rankingList").innerHTML = rankingHtml;
+        document.getElementById("rankingPreview").style.display = "block";
+      }
+
+      function saveEventScores() {
+        if (!scoringEventId || !tempTimes[scoringEventId]) {
+          alert("Please enter times for at least one house");
+          return;
+        }
+
+        const times = tempTimes[scoringEventId];
+        const validEntries = Object.entries(times).filter(
+          ([house, time]) => time > 0,
+        );
+
+        if (validEntries.length === 0) {
+          alert("Please enter valid times");
+          return;
+        }
+
+        const event = appData.events.find((e) => e.id === scoringEventId);
+
+        // Sort by time (fastest first) and assign positions
+        const sorted = validEntries.sort((a, b) => a[1] - b[1]);
+        const finalScores = {};
+
+        sorted.forEach(([house, time], index) => {
+          const position = index + 1;
+          finalScores[house] = {
+            position: position,
+            time: time,
+          };
+        });
+
+        // Mark DNS entries
+        Object.entries(times).forEach(([house, time]) => {
+          if (time === -1) {
+            finalScores[house] = { position: 0, time: -1 }; // DNS
+          }
+        });
+
+        appData.scores[scoringEventId] = finalScores;
+        event.completed = true;
+
+        // Add to history
+        sorted.forEach(([house, time], index) => {
+          const position = index + 1;
+          const points =
+            event.type === "relay"
+              ? scoringSystem.relay[position]
+              : scoringSystem.individual[position];
+
+          const minutes = Math.floor(time / 60);
+          const seconds = Math.floor(time % 60);
+          const ms = Math.round((time % 1) * 100);
+          const timeStr = `${minutes}:${seconds.toString().padStart(2, "0")}.${ms.toString().padStart(2, "0")}`;
+
+          appData.history.unshift({
+            time: new Date().toLocaleTimeString(),
+            event: `${event.id}: ${event.name}`,
+            house,
+            position,
+            points,
+            timeStr,
+            category: event.category,
+            isRelay: event.type === "relay",
+          });
+        });
+
+        // Sync to Firebase if available
+        syncToFirebase();
+
+        saveToStorage();
+        renderStandings();
+        renderBreakdown();
+        renderEvents();
+        renderHistory();
+        closeScoring();
+        delete tempTimes[scoringEventId];
+      }
+
+      // Rendering Functions
+      function renderStandings() {
+        const container = document.getElementById("standingsContent");
+
+        const totals = {};
+        const medals = {};
+        Object.keys(appData.houses).forEach((h) => {
+          totals[h] = 0;
+          medals[h] = { gold: 0, silver: 0, bronze: 0 };
+        });
+
+        Object.entries(appData.scores).forEach(([eventId, scores]) => {
+          const event = appData.events.find((e) => e.id === eventId);
+          if (!event) return;
+
+          Object.entries(scores).forEach(([house, data]) => {
+            // Handle new format: {position, time} or old format: just position number
+            const position = typeof data === "object" ? data.position : data;
+            if (position > 0 && totals[house] !== undefined) {
+              const points =
+                event.type === "relay"
+                  ? scoringSystem.relay[position]
+                  : scoringSystem.individual[position];
+              totals[house] += points;
+
+              if (position === 1) medals[house].gold++;
+              if (position === 2) medals[house].silver++;
+              if (position === 3) medals[house].bronze++;
+            }
+          });
+        });
+
+        const sorted = Object.entries(totals).sort((a, b) => b[1] - a[1]);
+        const maxPoints = sorted[0]?.[1] || 1;
+
+        if (sorted.length === 0 || sorted[0][1] === 0) {
+          container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🏊</div>
+                        <h3>No scores yet</h3>
+                        <p>Click on events in the Event Status tab to enter scores</p>
+                    </div>
+                `;
+          return;
+        }
+
+        container.innerHTML = sorted
+          .map(([house, points], index) => {
+            const rank = index + 1;
+            const houseData = appData.houses[house];
+
+            return `
+                    <div class="house-rank rank-${rank <= 3 ? rank : "other"}">
+                        ${rank === 1 ? '<div class="winner-crown">👑</div>' : ""}
+                        <div class="rank-number">#${rank}</div>
+                        <div class="house-info">
+                            <div class="house-name">
+                                <span class="house-color-dot" style="background: ${houseData?.color || "#999"};"></span>
+                                ${house}
+                            </div>
+                            <div class="house-stats">
+                                ${medals[house].gold} Gold • ${medals[house].silver} Silver • ${medals[house].bronze} Bronze
+                            </div>
+                        </div>
+                        <div class="points-display">
+                            <div class="points">${points}</div>
+                            <div class="points-label">points</div>
+                        </div>
+                    </div>
+                `;
+          })
+          .join("");
+      }
+
+      function renderBreakdown() {
+        const container = document.getElementById("breakdownContent");
+
+        const houseStats = {};
+        Object.keys(appData.houses).forEach((h) => {
+          houseStats[h] = {
+            total: 0,
+            gold: 0,
+            silver: 0,
+            bronze: 0,
+            events: 0,
+            byPosition: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 },
+          };
+        });
+
+        Object.entries(appData.scores).forEach(([eventId, scores]) => {
+          const event = appData.events.find((e) => e.id === eventId);
+          if (!event) return;
+
+          Object.entries(scores).forEach(([house, data]) => {
+            // Handle new format: {position, time} or old format: just position number
+            const position = typeof data === "object" ? data.position : data;
+            if (position > 0 && houseStats[house]) {
+              const points =
+                event.type === "relay"
+                  ? scoringSystem.relay[position]
+                  : scoringSystem.individual[position];
+              houseStats[house].total += points;
+              houseStats[house].events++;
+              houseStats[house].byPosition[position]++;
+
+              if (position === 1) houseStats[house].gold++;
+              if (position === 2) houseStats[house].silver++;
+              if (position === 3) houseStats[house].bronze++;
+            }
+          });
+        });
+
+        const sorted = Object.entries(houseStats).sort(
+          (a, b) => b[1].total - a[1].total,
+        );
+
+        if (sorted[0]?.[1].total === 0) {
+          container.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <div class="empty-state-icon">📊</div>
+                        <h3>No data available</h3>
+                        <p>Complete events to see detailed breakdowns</p>
+                    </div>
+                `;
+          return;
+        }
+
+        container.innerHTML = sorted
+          .map(([house, stats]) => {
+            const houseData = appData.houses[house];
+            const avgPoints =
+              stats.events > 0 ? (stats.total / stats.events).toFixed(1) : 0;
+
+            return `
+                    <div class="breakdown-card" style="border-color: ${houseData?.color || "#e2e8f0"};">
+                        <div class="breakdown-header">
+                            <div class="breakdown-title" style="color: ${houseData?.color || "#2d3748"};">
+                                <span class="house-color-dot" style="background: ${houseData?.color || "#999"};"></span>
+                                ${house}
+                            </div>
+                            <div style="font-size: 1.5rem; font-weight: 800; color: ${houseData?.color || "#2d3748"};">${stats.total}</div>
+                        </div>
+                        
+                        <div class="medal-grid">
+                            <div class="medal-box">
+                                <div class="medal-icon">🥇</div>
+                                <div class="medal-count" style="color: #744210;">${stats.gold}</div>
+                                <div class="medal-label">Gold</div>
+                            </div>
+                            <div class="medal-box">
+                                <div class="medal-icon">🥈</div>
+                                <div class="medal-count" style="color: #4a5568;">${stats.silver}</div>
+                                <div class="medal-label">Silver</div>
+                            </div>
+                            <div class="medal-box">
+                                <div class="medal-icon">🥉</div>
+                                <div class="medal-count" style="color: #744210;">${stats.bronze}</div>
+                                <div class="medal-label">Bronze</div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem;">
+                                <span>Events Completed:</span>
+                                <strong>${stats.events}</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                                <span>Avg Points/Event:</span>
+                                <strong>${avgPoints}</strong>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 15px;">
+                            <div style="font-size: 0.8rem; font-weight: 600; color: #718096; margin-bottom: 8px;">POSITION BREAKDOWN</div>
+                            ${[1, 2, 3, 4, 5, 6]
+                              .map(
+                                (pos) => `
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                                    <span style="width: 40px; font-size: 0.8rem; color: #718096;">${pos === 1 ? "🥇" : pos === 2 ? "🥈" : pos === 3 ? "🥉" : pos + "th"}:</span>
+                                    <div style="flex: 1; height: 20px; background: #e2e8f0; border-radius: 10px; overflow: hidden;">
+                                        <div style="width: ${Math.max((stats.byPosition[pos] / Math.max(...Object.values(stats.byPosition), 1)) * 100, 5)}%; height: 100%; background: ${houseData?.color || "#999"}; opacity: ${0.3 + pos * 0.12};"></div>
+                                    </div>
+                                    <span style="width: 30px; text-align: right; font-weight: 600; font-size: 0.9rem;">${stats.byPosition[pos]}</span>
+                                </div>
+                            `,
+                              )
+                              .join("")}
+                        </div>
+                    </div>
+                `;
+          })
+          .join("");
+      }
+
+      function renderEvents() {
+        const container = document.getElementById("eventsContent");
+        const day = currentEventView === "day1" ? "Mar 31" : "Apr 1";
+        const dayEvents = appData.events.filter((e) => e.day === day);
+
+        if (dayEvents.length === 0) {
+          container.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <div class="empty-state-icon">📋</div>
+                        <h3>No events configured</h3>
+                        <p>Add events in the admin settings</p>
+                    </div>
+                `;
+          return;
+        }
+
+        container.innerHTML = dayEvents
+          .map((event) => {
+            const scores = appData.scores[event.id] || {};
+            const hasScores = Object.keys(scores).length > 0;
+            const scoreBadges = hasScores
+              ? Object.entries(scores)
+                  .filter(([h, data]) => {
+                    const pos = typeof data === "object" ? data.position : data;
+                    return pos > 0;
+                  })
+                  .sort((a, b) => {
+                    const posA =
+                      typeof a[1] === "object" ? a[1].position : a[1];
+                    const posB =
+                      typeof b[1] === "object" ? b[1].position : b[1];
+                    return posA - posB;
+                  })
+                  .map(([house, data]) => {
+                    const pos = typeof data === "object" ? data.position : data;
+                    const time = typeof data === "object" ? data.time : null;
+                    const badgeClass =
+                      pos === 1
+                        ? "gold"
+                        : pos === 2
+                          ? "silver"
+                          : pos === 3
+                            ? "bronze"
+                            : "";
+                    let timeStr = "";
+                    if (time && time > 0) {
+                      const min = Math.floor(time / 60);
+                      const sec = Math.floor(time % 60);
+                      const ms = Math.round((time % 1) * 100);
+                      timeStr = ` (${min}:${sec.toString().padStart(2, "0")}.${ms.toString().padStart(2, "0")})`;
+                    }
+                    return `<span class="score-badge ${badgeClass}">${house}: ${pos}${pos === 1 ? "st" : pos === 2 ? "nd" : pos === 3 ? "rd" : "th"}${timeStr}</span>`;
+                  })
+                  .join("")
+              : "";
+
+            return `
+                    <div class="event-card ${hasScores ? "completed" : ""}" onclick="openScoring('${event.id}')">
+                        <div class="event-header">
+                            <div class="event-name">${event.id}: ${event.name}</div>
+                            <span class="event-status ${hasScores ? "status-completed" : "status-pending"}">
+                                ${hasScores ? "✓ Completed" : "Click to Score"}
+                            </span>
+                        </div>
+                        <div class="event-meta">${event.category} • ${event.type === "relay" ? "Relay" : "Individual"}</div>
+                        ${scoreBadges ? `<div class="event-scores">${scoreBadges}</div>` : ""}
+                    </div>
+                `;
+          })
+          .join("");
+      }
+
+      function renderHistory() {
+        const container = document.getElementById("historyContent");
+
+        if (appData.history.length === 0) {
+          container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📜</div>
+                        <h3>No history yet</h3>
+                        <p>Score updates will be recorded here</p>
+                    </div>
+                `;
+          return;
+        }
+
+        container.innerHTML = appData.history
+          .slice(0, 50)
+          .map((item) => {
+            const timeDisplay = item.timeStr
+              ? ` in <strong>${item.timeStr}</strong>`
+              : "";
+            const relayBadge = item.isRelay ? " 🏃‍♂️ Relay" : "";
+            return `
+                    <div class="history-item">
+                        <div class="history-time">${item.time} • ${item.event}${relayBadge}</div>
+                        <div class="history-content">
+                            <strong style="color: ${appData.houses[item.house]?.color || "#2d3748"};">${item.house}</strong> 
+                            finished <strong>${item.position}${item.position === 1 ? "st" : item.position === 2 ? "nd" : item.position === 3 ? "rd" : "th"}</strong>
+                            in ${item.category}${timeDisplay}
+                            earning <strong>+${item.points} points</strong>
+                        </div>
+                    </div>
+                `;
+          })
+          .join("");
+      }
+
+      // Individual Rankings by Event Category
+      function renderIndividualRankings() {
+        const container = document.getElementById("individualRankingsContent");
+        const categoryFilter =
+          document.getElementById("rankingCategoryFilter")?.value || "all";
+        const houseFilter =
+          document.getElementById("rankingHouseFilter")?.value || "all";
+        const eventFilter =
+          document.getElementById("rankingEventFilter")?.value || "all";
+
+        // Populate house filter options if not already done
+        const houseSelect = document.getElementById("rankingHouseFilter");
+        if (houseSelect && houseSelect.options.length <= 1) {
+          Object.keys(appData.houses).forEach((house) => {
+            const option = document.createElement("option");
+            option.value = house;
+            option.textContent = house;
+            houseSelect.appendChild(option);
+          });
+        }
+
+        // Populate event filter options if not already done
+        const eventSelect = document.getElementById("rankingEventFilter");
+        if (eventSelect && eventSelect.options.length <= 1) {
+          appData.events.forEach((event) => {
+            const option = document.createElement("option");
+            option.value = event.id;
+            option.textContent = `${event.id}: ${event.name}`;
+            eventSelect.appendChild(option);
+          });
+        }
+
+        // Collect all individual times from scores
+        const allPerformances = [];
+
+        Object.entries(appData.scores).forEach(([eventId, scores]) => {
+          const event = appData.events.find((e) => e.id === eventId);
+          if (!event) return;
+
+          // Apply filters
+          if (
+            categoryFilter !== "all" &&
+            !event.category.includes(categoryFilter.replace("Grade ", ""))
+          )
+            return;
+          if (eventFilter !== "all" && eventId !== eventFilter) return;
+
+          Object.entries(scores).forEach(([house, data]) => {
+            if (houseFilter !== "all" && house !== houseFilter) return;
+
+            const position = typeof data === "object" ? data.position : data;
+            const time = typeof data === "object" ? data.time : null;
+
+            if (position > 0 && time && time > 0) {
+              allPerformances.push({
+                house,
+                event: event.name,
+                eventId,
+                category: event.category,
+                position,
+                time,
+                isRelay: event.type === "relay",
+              });
+            }
+          });
+        });
+
+        if (allPerformances.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state" style="grid-column: 1/-1;">
+              <div class="empty-state-icon">🏅</div>
+              <h3>No individual rankings available</h3>
+              <p>Complete events with times to see individual swimmer rankings</p>
+            </div>
+          `;
+          return;
+        }
+
+        // Group by event
+        const byEvent = {};
+        allPerformances.forEach((p) => {
+          const key = `${p.event} (${p.category})`;
+          if (!byEvent[key]) byEvent[key] = [];
+          byEvent[key].push(p);
+        });
+
+        // Sort each event by time (fastest first)
+        Object.keys(byEvent).forEach((key) => {
+          byEvent[key].sort((a, b) => a.time - b.time);
+        });
+
+        // Render
+        container.innerHTML = Object.entries(byEvent)
+          .sort((a, b) => a[0].localeCompare(b[0]))
+          .map(([eventName, performances]) => {
+            return `
+              <div class="ranking-category-card">
+                <div class="ranking-category-header">
+                  <span>${eventName}</span>
+                  <span style="font-size: 0.8rem; color: #718096;">${performances.length} swimmers</span>
+                </div>
+                <div class="ranking-list">
+                  ${performances
+                    .map((p, idx) => {
+                      const rank = idx + 1;
+                      const rankClass =
+                        rank === 1
+                          ? "gold"
+                          : rank === 2
+                            ? "silver"
+                            : rank === 3
+                              ? "bronze"
+                              : "other";
+                      const itemClass = rank <= 3 ? `rank-${rank}` : "";
+                      const minutes = Math.floor(p.time / 60);
+                      const seconds = Math.floor(p.time % 60);
+                      const ms = Math.round((p.time % 1) * 100);
+                      const timeStr = `${minutes}:${seconds.toString().padStart(2, "0")}.${ms.toString().padStart(2, "0")}`;
+                      const houseColor =
+                        appData.houses[p.house]?.color || "#999";
+
+                      return `
+                      <div class="ranking-item ${itemClass}">
+                        <div class="ranking-position ${rankClass}">${rank}</div>
+                        <div class="ranking-swimmer-info">
+                          <div class="ranking-swimmer-name" style="color: ${houseColor};">${p.house}</div>
+                          <div class="ranking-swimmer-details">${p.isRelay ? "🏃‍♂️ Relay" : "Individual"}</div>
+                        </div>
+                        <div class="ranking-time">${timeStr}</div>
+                      </div>
+                    `;
+                    })
+                    .join("")}
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+      }
+
+      // Rotation Settings
+      function saveRotationSettings() {
+        const interval = parseInt(
+          document.getElementById("rotationInterval").value,
+        );
+        const videoDuration = parseInt(
+          document.getElementById("videoDuration").value,
+        );
+        const cycles = parseInt(
+          document.getElementById("leaderboardCycles").value,
+        );
+        const autoRotate = document.getElementById("autoRotate").checked;
+
+        if (interval < 5 || interval > 60) {
+          alert("Tab interval must be between 5 and 60 seconds");
+          return;
+        }
+
+        appData.settings.rotationInterval = interval;
+        appData.settings.videoDuration = videoDuration;
+        appData.settings.leaderboardCycles = cycles;
+        appData.settings.autoRotate = autoRotate;
+        saveToStorage();
+
+        clearTimers();
+        if (autoRotate) startRotation();
+
+        alert("Settings saved!");
+      }
+
+      // Data Export/Import
+      function exportData() {
+        const dataStr = JSON.stringify(appData, null, 2);
+        const blob = new Blob([dataStr], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `mvs-gala-2026-backup-${new Date().toISOString().split("T")[0]}.json`;
+        a.click();
+      }
+
+      function resetAllData() {
+        if (
+          confirm(
+            "⚠️ WARNING: This will delete ALL data including houses, participants, scores, and history. This cannot be undone!",
+          )
+        ) {
+          if (confirm("Are you absolutely sure? Click OK to confirm.")) {
+            localStorage.removeItem("mvsGala2026");
+            location.reload();
+          }
+        }
+      }
+
+      // Initialize on load
+      init();
+    </script>
+  </body>
+</html>
