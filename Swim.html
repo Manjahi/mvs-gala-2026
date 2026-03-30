@@ -973,6 +973,168 @@
         .ranking-category-card {
           padding: 15px;
         }
+        
+        /* Mobile Header Fixes */
+        header {
+          flex-direction: column;
+          padding: 15px;
+          gap: 15px;
+        }
+        
+        .header-left {
+          flex-direction: column;
+          text-align: center;
+          gap: 10px;
+        }
+        
+        .branding-logo {
+          width: 60px;
+          height: 60px;
+        }
+        
+        .branding-logo img,
+        .branding-logo svg {
+          width: 50px;
+          height: 50px;
+        }
+        
+        .swimmer-graphic {
+          display: none;
+        }
+        
+        .header-text h1 {
+          font-size: 1.3rem;
+        }
+        
+        .header-text .theme-text {
+          font-size: 1rem;
+        }
+        
+        .header-text .subtitle {
+          font-size: 0.8rem;
+        }
+        
+        .header-right {
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
+        }
+        
+        .anniversary-badge {
+          padding: 8px 12px;
+          font-size: 0.75rem;
+        }
+        
+        .live-indicator {
+          padding: 6px 12px;
+          font-size: 0.8rem;
+        }
+        
+        /* Mobile Tab Navigation */
+        .tab-nav {
+          flex-direction: column;
+          gap: 8px;
+        }
+        
+        .tab-btn {
+          padding: 10px 16px;
+          font-size: 0.85rem;
+          width: 100%;
+          text-align: center;
+        }
+        
+        /* Mobile Tabs & Subtabs */
+        .tabs {
+          flex-wrap: wrap;
+          gap: 8px;
+          border-bottom: none;
+          padding-bottom: 0;
+        }
+        
+        .subtab {
+          padding: 8px 14px;
+          font-size: 0.8rem;
+          margin-bottom: 0;
+          border-bottom: none;
+          border-radius: 20px;
+          background: #e2e8f0;
+          flex: 1;
+          min-width: 100px;
+          text-align: center;
+        }
+        
+        .subtab.active {
+          border-bottom-color: transparent;
+          background: var(--mvs-blue);
+          color: white;
+        }
+        
+        /* Content area padding */
+        .content-area {
+          padding: 15px;
+        }
+        
+        .section-title {
+          font-size: 1.2rem;
+        }
+        
+        /* Mobile Event Cards */
+        .events-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+        
+        .event-card {
+          padding: 15px;
+        }
+        
+        .event-name {
+          font-size: 0.9rem;
+        }
+        
+        .event-meta {
+          font-size: 0.8rem;
+        }
+        
+        /* Mobile Houses Grid */
+        .houses-podium {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+        
+        .house-card {
+          padding: 15px;
+        }
+        
+        .house-name {
+          font-size: 1.1rem;
+        }
+        
+        .house-points {
+          font-size: 2rem;
+        }
+        
+        /* Mobile Breakdown Grid */
+        .breakdown-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        /* Mobile Body padding */
+        body {
+          padding: 10px;
+        }
+        
+        /* Event Management Lists */
+        .event-item {
+          flex-direction: column;
+          gap: 10px;
+          align-items: stretch;
+        }
+        
+        .event-item input,
+        .event-item select {
+          width: 100%;
+        }
       }
 
       .settings-header {
@@ -1713,10 +1875,13 @@
         <div class="settings-section-title">🏊 Event Management</div>
         <div class="tabs">
           <button class="subtab active" onclick="switchEventTab('day1')">
-            Day 1 (Mar 31)
+            Day 1 (Mar 30)
           </button>
           <button class="subtab" onclick="switchEventTab('day2')">
-            Day 2 (Apr 1)
+            Day 2 (Mar 31)
+          </button>
+          <button class="subtab" onclick="switchEventTab('day3')">
+            Day 3 (Apr 1)
           </button>
         </div>
 
@@ -2011,7 +2176,7 @@
               <h1>Inter House Swimming Gala 2026</h1>
               <div class="theme-text">"Just Keep Swimming"</div>
               <div class="subtitle">
-                Live Championship Leaderboard • March 31 - April 1, 2026
+                Live Championship Leaderboard • March 30 - April 1, 2026
               </div>
             </div>
           </div>
@@ -2088,10 +2253,13 @@
             <div class="section-title">Event Management & Scoring</div>
             <div class="tabs" style="margin-bottom: 20px">
               <button class="subtab active" onclick="switchEventView('day1')">
-                Day 1: Mar 31 (Grade 1-4)
+                Day 1: Mar 30 (Grade 1-2)
               </button>
               <button class="subtab" onclick="switchEventView('day2')">
-                Day 2: Apr 1 (Grade 5-9)
+                Day 2: Mar 31 (Grade 3-6)
+              </button>
+              <button class="subtab" onclick="switchEventView('day3')">
+                Day 3: Apr 1 (Grade 7-9)
               </button>
             </div>
             <div id="eventsContent" class="events-grid">
@@ -2214,251 +2382,54 @@
         },
       };
 
-      // Pre-configured events
+      // Pre-configured events based on PDF: "Inter House Swimming Entry List 31 Mar - 1 Apr 2026"
+      // Day 1: March 30 - Events 101-106 (Grade 1-2)
+      // Day 2: March 31 - Events 201-218 (Grade 3-6)
+      // Day 3: April 1 - Events 301-315 (Grade 7-9)
       const defaultEvents = [
-        {
-          id: "D1-E1",
-          name: "25m Free",
-          category: "Grade 1-2",
-          day: "Mar 31",
-          group: "Grade 1-4",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D1-E2",
-          name: "25m Free",
-          category: "Grade 3-4",
-          day: "Mar 31",
-          group: "Grade 1-4",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D1-E3",
-          name: "25m Breast",
-          category: "Grade 1-2",
-          day: "Mar 31",
-          group: "Grade 1-4",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D1-E4",
-          name: "25m Breast",
-          category: "Grade 3-4",
-          day: "Mar 31",
-          group: "Grade 1-4",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D1-E5",
-          name: "25m Back",
-          category: "Grade 1-4 Open",
-          day: "Mar 31",
-          group: "Grade 1-4",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D1-E6",
-          name: "25m Fly",
-          category: "Grade 1-4 Open",
-          day: "Mar 31",
-          group: "Grade 1-4",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D1-E7",
-          name: "50m Free",
-          category: "Grade 3-4",
-          day: "Mar 31",
-          group: "Grade 1-4",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D1-E8",
-          name: "50m Breast",
-          category: "Grade 3-4",
-          day: "Mar 31",
-          group: "Grade 1-4",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D1-E9",
-          name: "50m Back",
-          category: "Grade 1-4 Open",
-          day: "Mar 31",
-          group: "Grade 1-4",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D1-E10",
-          name: "50m Fly",
-          category: "Grade 1-4 Open",
-          day: "Mar 31",
-          group: "Grade 1-4",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D1-E11",
-          name: "4x25m Freestyle Relay",
-          category: "Grade 1-2",
-          day: "Mar 31",
-          group: "Grade 1-4",
-          type: "relay",
-          completed: false,
-        },
-        {
-          id: "D1-E12",
-          name: "4x25m Freestyle Relay",
-          category: "Grade 3-4",
-          day: "Mar 31",
-          group: "Grade 1-4",
-          type: "relay",
-          completed: false,
-        },
-        {
-          id: "D1-E13",
-          name: "4x25m Mixed Relay",
-          category: "Grade 1-4 Open",
-          day: "Mar 31",
-          group: "Grade 1-4",
-          type: "relay",
-          completed: false,
-        },
-        {
-          id: "D2-E1",
-          name: "100m IM",
-          category: "Grade 7-9",
-          day: "Apr 1",
-          group: "Grade 7-9",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D2-E2",
-          name: "50m Fly",
-          category: "Grade 5&6",
-          day: "Apr 1",
-          group: "Grade 5-6",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D2-E3",
-          name: "50m Fly",
-          category: "Grade 7-9",
-          day: "Apr 1",
-          group: "Grade 7-9",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D2-E4",
-          name: "50m Back",
-          category: "Grade 5&6",
-          day: "Apr 1",
-          group: "Grade 5-6",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D2-E5",
-          name: "50m Back",
-          category: "Grade 7-9",
-          day: "Apr 1",
-          group: "Grade 7-9",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D2-E6",
-          name: "50m Breast",
-          category: "Grade 5&6",
-          day: "Apr 1",
-          group: "Grade 5-6",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D2-E7",
-          name: "50m Breast",
-          category: "Grade 7-9",
-          day: "Apr 1",
-          group: "Grade 7-9",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D2-E8",
-          name: "50m Free",
-          category: "Grade 5&6",
-          day: "Apr 1",
-          group: "Grade 5-6",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D2-E9",
-          name: "50m Free",
-          category: "Grade 7-9",
-          day: "Apr 1",
-          group: "Grade 7-9",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D2-E10",
-          name: "25m Free",
-          category: "Grade 5&6",
-          day: "Apr 1",
-          group: "Grade 5-6",
-          type: "individual",
-          completed: false,
-        },
-        {
-          id: "D2-E11",
-          name: "4x25m Medley Relay",
-          category: "Grade 7-9",
-          day: "Apr 1",
-          group: "Grade 7-9",
-          type: "relay",
-          completed: false,
-        },
-        {
-          id: "D2-E12",
-          name: "4x25m Freestyle Relay",
-          category: "Grade 5&6",
-          day: "Apr 1",
-          group: "Grade 5-6",
-          type: "relay",
-          completed: false,
-        },
-        {
-          id: "D2-E13",
-          name: "4x25m Mixed Freestyle Relay",
-          category: "Grade 7-9",
-          day: "Apr 1",
-          group: "Grade 7-9",
-          type: "relay",
-          completed: false,
-        },
-        {
-          id: "D2-E14",
-          name: "4x25m Mixed Freestyle Relay",
-          category: "Grade 5&6",
-          day: "Apr 1",
-          group: "Grade 5-6",
-          type: "relay",
-          completed: false,
-        },
+        // ==================== DAY 1: MARCH 30 - GRADE 1-2 ====================
+        { id: "E101", name: "Girls 8 & Under 17 SC Meter Backstroke Kickboard", category: "Grade 1-2 Girls", day: "Mar 30", group: "Grade 1-2", type: "individual", completed: false },
+        { id: "E102", name: "Boys 8 & Under 17 SC Meter Backstroke Kickboard", category: "Grade 1-2 Boys", day: "Mar 30", group: "Grade 1-2", type: "individual", completed: false },
+        { id: "E103", name: "Girls 8 & Under 17 SC Meter Freestyle Kickboard", category: "Grade 1-2 Girls", day: "Mar 30", group: "Grade 1-2", type: "individual", completed: false },
+        { id: "E104", name: "Boys 8 & Under 17 SC Meter Freestyle Kickboard", category: "Grade 1-2 Boys", day: "Mar 30", group: "Grade 1-2", type: "individual", completed: false },
+        { id: "E105", name: "Girls 8 & Under 25 SC Meter Freestyle Kickboard", category: "Grade 1-2 Girls", day: "Mar 30", group: "Grade 1-2", type: "individual", completed: false },
+        { id: "E106", name: "Boys 8 & Under 25 SC Meter Freestyle Kickboard", category: "Grade 1-2 Boys", day: "Mar 30", group: "Grade 1-2", type: "individual", completed: false },
+        
+        // ==================== DAY 2: MARCH 31 - GRADE 3-6 ====================
+        { id: "E201", name: "Girls 10 & Under 25 SC Meter Freestyle", category: "Grade 3-4 Girls", day: "Mar 31", group: "Grade 3-6", type: "individual", completed: false },
+        { id: "E202", name: "Boys 10 & Under 25 SC Meter Freestyle", category: "Grade 3-4 Boys", day: "Mar 31", group: "Grade 3-6", type: "individual", completed: false },
+        { id: "E203", name: "Girls 10-13 25 SC Meter Freestyle", category: "Grade 5-6 Girls", day: "Mar 31", group: "Grade 3-6", type: "individual", completed: false },
+        { id: "E204", name: "Boys 10-13 25 SC Meter Freestyle", category: "Grade 5-6 Boys", day: "Mar 31", group: "Grade 3-6", type: "individual", completed: false },
+        { id: "E205", name: "Girls 10 & Under 25 SC Meter Backstroke Kickboard", category: "Grade 3-4 Girls", day: "Mar 31", group: "Grade 3-6", type: "individual", completed: false },
+        { id: "E206", name: "Boys 10 & Under 25 SC Meter Backstroke Kickboard", category: "Grade 3-4 Boys", day: "Mar 31", group: "Grade 3-6", type: "individual", completed: false },
+        { id: "E207", name: "Girls 10-13 25 SC Meter Backstroke", category: "Grade 5-6 Girls", day: "Mar 31", group: "Grade 3-6", type: "individual", completed: false },
+        { id: "E208", name: "Boys 10-13 25 SC Meter Backstroke", category: "Grade 5-6 Boys", day: "Mar 31", group: "Grade 3-6", type: "individual", completed: false },
+        { id: "E209", name: "Girls 10-13 25 SC Meter Breaststroke", category: "Grade 5-6 Girls", day: "Mar 31", group: "Grade 3-6", type: "individual", completed: false },
+        { id: "E210", name: "Boys 10-13 25 SC Meter Breaststroke", category: "Grade 5-6 Boys", day: "Mar 31", group: "Grade 3-6", type: "individual", completed: false },
+        { id: "E211", name: "Girls 10-13 25 SC Meter Butterfly", category: "Grade 5-6 Girls", day: "Mar 31", group: "Grade 3-6", type: "individual", completed: false },
+        { id: "E212", name: "Boys 10-13 25 SC Meter Butterfly", category: "Grade 5-6 Boys", day: "Mar 31", group: "Grade 3-6", type: "individual", completed: false },
+        { id: "E213", name: "Mixed 10 & Under 100 SC Meter Freestyle Relay", category: "Grade 3-4 Mixed", day: "Mar 31", group: "Grade 3-6", type: "relay", completed: false },
+        { id: "E214", name: "Mixed 10-13 100 SC Meter Medley Relay", category: "Grade 5-6 Mixed", day: "Mar 31", group: "Grade 3-6", type: "relay", completed: false },
+        { id: "E215", name: "Girls 10 & Under 100 SC Meter Freestyle Relay", category: "Grade 3-4 Girls", day: "Mar 31", group: "Grade 3-6", type: "relay", completed: false },
+        { id: "E216", name: "Boys 10 & Under 100 SC Meter Freestyle Relay", category: "Grade 3-4 Boys", day: "Mar 31", group: "Grade 3-6", type: "relay", completed: false },
+        { id: "E217", name: "Mixed 10-13 100 SC Meter Freestyle Relay", category: "Grade 5-6 Mixed", day: "Mar 31", group: "Grade 3-6", type: "relay", completed: false },
+        
+        // ==================== DAY 3: APRIL 1 - GRADE 7-9 ====================
+        { id: "E301", name: "Girls 12 & Over 100 SC Meter IM", category: "Grade 7-9 Girls", day: "Apr 1", group: "Grade 7-9", type: "individual", completed: false },
+        { id: "E302", name: "Boys 12 & Over 100 SC Meter IM", category: "Grade 7-9 Boys", day: "Apr 1", group: "Grade 7-9", type: "individual", completed: false },
+        { id: "E303", name: "Girls 12 & Over 25 SC Meter Breaststroke", category: "Grade 7-9 Girls", day: "Apr 1", group: "Grade 7-9", type: "individual", completed: false },
+        { id: "E304", name: "Boys 12 & Over 25 SC Meter Breaststroke", category: "Grade 7-9 Boys", day: "Apr 1", group: "Grade 7-9", type: "individual", completed: false },
+        { id: "E305", name: "Girls 12 & Over 25 SC Meter Backstroke", category: "Grade 7-9 Girls", day: "Apr 1", group: "Grade 7-9", type: "individual", completed: false },
+        { id: "E306", name: "Boys 12 & Over 25 SC Meter Backstroke", category: "Grade 7-9 Boys", day: "Apr 1", group: "Grade 7-9", type: "individual", completed: false },
+        { id: "E307", name: "Girls 12 & Over 25 SC Meter Butterfly", category: "Grade 7-9 Girls", day: "Apr 1", group: "Grade 7-9", type: "individual", completed: false },
+        { id: "E308", name: "Boys 12 & Over 25 SC Meter Butterfly", category: "Grade 7-9 Boys", day: "Apr 1", group: "Grade 7-9", type: "individual", completed: false },
+        { id: "E309", name: "Mixed 12 & Over 100 SC Meter Medley Relay", category: "Grade 7-9 Mixed", day: "Apr 1", group: "Grade 7-9", type: "relay", completed: false },
+        { id: "E310", name: "Girls 12 & Over 25 SC Meter Freestyle", category: "Grade 7-9 Girls", day: "Apr 1", group: "Grade 7-9", type: "individual", completed: false },
+        { id: "E311", name: "Boys 12 & Over 25 SC Meter Freestyle", category: "Grade 7-9 Boys", day: "Apr 1", group: "Grade 7-9", type: "individual", completed: false },
+        { id: "E312", name: "Girls 12 & Over 100 SC Meter Freestyle Relay", category: "Grade 7-9 Girls", day: "Apr 1", group: "Grade 7-9", type: "relay", completed: false },
+        { id: "E313", name: "Boys 100 SC Meter Freestyle Relay", category: "Grade 7-9 Boys", day: "Apr 1", group: "Grade 7-9", type: "relay", completed: false },
+        { id: "E314", name: "Girls 12 & Over 100 SC Meter Medley Relay", category: "Grade 7-9 Girls", day: "Apr 1", group: "Grade 7-9", type: "relay", completed: false },
+        { id: "E315", name: "Boys 100 SC Meter Medley Relay", category: "Grade 7-9 Boys", day: "Apr 1", group: "Grade 7-9", type: "relay", completed: false },
       ];
 
       let currentTab = 0;
@@ -2507,7 +2478,8 @@
         renderHistory();
         renderEventManagementLists();
 
-        if (!isPublicView()) {
+        // Start auto-rotation if enabled (works in both admin and public view)
+        if (appData.settings.autoRotate) {
           startRotation();
         }
 
@@ -2519,8 +2491,21 @@
         }, 2000);
       }
 
+      // Config version - increment this when events/dates change to force refresh
+      const CONFIG_VERSION = "2025-03-30-v5-final";
+      
       function loadFromStorage() {
         const saved = localStorage.getItem("mvsGala2026");
+        const savedVersion = localStorage.getItem("mvsGalaConfigVersion");
+        
+        // Clear storage if config version changed
+        if (savedVersion !== CONFIG_VERSION) {
+          localStorage.removeItem("mvsGala2026");
+          localStorage.setItem("mvsGalaConfigVersion", CONFIG_VERSION);
+          console.log("Config updated to version:", CONFIG_VERSION);
+          return;
+        }
+        
         if (saved) {
           try {
             appData = JSON.parse(saved);
@@ -2746,7 +2731,7 @@
 
       // Phase Management (Leaderboard vs Video)
       function startRotation() {
-        if (!appData.settings.autoRotate || isPublicView()) return;
+        if (!appData.settings.autoRotate) return;
 
         clearTimers();
         currentPhase = "leaderboard";
@@ -2904,7 +2889,8 @@
         // User manually clicked - reset rotation but stay in phase
         clearTimers();
         switchTab(index);
-        if (currentPhase === "leaderboard" && !isPublicView()) {
+        // Resume rotation if in leaderboard phase and auto-rotate is enabled
+        if (currentPhase === "leaderboard" && appData.settings.autoRotate) {
           runLeaderboardPhase();
         }
       }
@@ -3080,14 +3066,19 @@
       function renderEventManagementLists() {
         const day1Container = document.getElementById("day1EventList");
         const day2Container = document.getElementById("day2EventList");
+        const day3Container = document.getElementById("day3EventList");
 
-        const day1Events = appData.events.filter((e) => e.day === "Mar 31");
-        const day2Events = appData.events.filter((e) => e.day === "Apr 1");
+        const day1Events = appData.events.filter((e) => e.day === "Mar 30");
+        const day2Events = appData.events.filter((e) => e.day === "Mar 31");
+        const day3Events = appData.events.filter((e) => e.day === "Apr 1");
 
         day1Container.innerHTML = day1Events
           .map((event) => createEventEditorHTML(event))
           .join("");
         day2Container.innerHTML = day2Events
+          .map((event) => createEventEditorHTML(event))
+          .join("");
+        day3Container.innerHTML = day3Events
           .map((event) => createEventEditorHTML(event))
           .join("");
       }
@@ -3127,7 +3118,7 @@
           id,
           name,
           category,
-          day: day === "day1" ? "Mar 31" : "Apr 1",
+          day: day === "day1" ? "Mar 30" : day === "day2" ? "Mar 31" : "Apr 1",
           group:
             day === "day1"
               ? "Grade 1-4"
@@ -3169,7 +3160,7 @@
         document.querySelectorAll("#tab-2 .subtab").forEach((btn) => {
           btn.classList.toggle(
             "active",
-            btn.textContent.includes(day === "day1" ? "Mar 31" : "Apr 1"),
+            btn.textContent.includes(day === "day1" ? "Mar 30" : day === "day2" ? "Mar 31" : "Apr 1"),
           );
         });
         renderEvents();
@@ -3179,13 +3170,13 @@
         document.querySelectorAll(".subtab").forEach((btn, i) => {
           btn.classList.toggle(
             "active",
-            (day === "day1" && i === 0) || (day === "day2" && i === 1),
+            (day === "day1" && i === 0) || (day === "day2" && i === 1) || (day === "day3" && i === 2),
           );
         });
         document.querySelectorAll(".day-section").forEach((section, i) => {
           section.classList.toggle(
             "active",
-            (day === "day1" && i === 0) || (day === "day2" && i === 1),
+            (day === "day1" && i === 0) || (day === "day2" && i === 1) || (day === "day3" && i === 2),
           );
         });
         renderEventManagementLists();
@@ -3700,7 +3691,7 @@
 
       function renderEvents() {
         const container = document.getElementById("eventsContent");
-        const day = currentEventView === "day1" ? "Mar 31" : "Apr 1";
+        const day = currentEventView === "day1" ? "Mar 30" : currentEventView === "day2" ? "Mar 31" : "Apr 1";
         const dayEvents = appData.events.filter((e) => e.day === day);
 
         if (dayEvents.length === 0) {
@@ -3985,6 +3976,37 @@
         a.href = url;
         a.download = `mvs-gala-2026-backup-${new Date().toISOString().split("T")[0]}.json`;
         a.click();
+      }
+
+      // Import participants from PARTICIPANTS_IMPORT.js or custom data
+      function importParticipants(data) {
+        const importData = data || (window.PARTICIPANTS_DATA ? window.PARTICIPANTS_DATA : null);
+        
+        if (!importData) {
+          alert("No participant data found. Make sure PARTICIPANTS_IMPORT.js is loaded or pass data as parameter.");
+          return;
+        }
+        
+        let importedCount = 0;
+        let eventCount = 0;
+        
+        Object.keys(importData).forEach(eventId => {
+          const eventData = importData[eventId];
+          const event = appData.events.find(e => e.id === eventId);
+          
+          if (event && eventData.participants) {
+            // Add participants to event
+            if (!event.participants) event.participants = [];
+            event.participants = eventData.participants;
+            importedCount += eventData.participants.length;
+            eventCount++;
+          }
+        });
+        
+        saveToStorage();
+        renderAll();
+        alert(`✅ Import successful!\n${importedCount} participants imported across ${eventCount} events.`);
+        console.log(`Imported ${importedCount} participants across ${eventCount} events`);
       }
 
       function resetAllData() {

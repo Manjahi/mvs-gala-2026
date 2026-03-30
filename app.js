@@ -9,64 +9,57 @@
 
 const AppData = {
     houses: {
-        'Tsavo': { color: '#e53e3e', id: 'tsavo' },
-        'Amboseli': { color: '#38a169', id: 'amboseli' },
-        'Aberdare': { color: '#3182ce', id: 'aberdare' },
-        'Mara': { color: '#d69e2e', id: 'mara' },
-        'Samburu': { color: '#805ad5', id: 'samburu' }
+        'Tsavo': { color: '#d69e2e', id: 'tsavo' },      // Yellow/Gold
+        'Amboseli': { color: '#e53e3e', id: 'amboseli' }, // Red
+        'Aberdare': { color: '#38a169', id: 'aberdare' }, // Green
+        'Mara': { color: '#3182ce', id: 'mara' },        // Blue
+        'Samburu': { color: '#805ad5', id: 'samburu' }    // Purple
     },
     participants: [],
     events: [
-        // Grade 1-4 Day (March 31)
-        { id: 'G1-01', name: '17.5m Back (width)', category: 'Grade 1-2 Girls', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-02', name: '17.5m Back (width)', category: 'Grade 1-2 Boys', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-03', name: '17.5m Free (width)', category: 'Grade 1-2 Girls', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-04', name: '17.5m Free (width)', category: 'Grade 1-2 Boys', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-05', name: '25m Kickboard Free', category: 'Grade 1-2 Girls', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-06', name: '25m Kickboard Free', category: 'Grade 1-2 Boys', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-07', name: '25m Back', category: 'Grade 3-4 Girls', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-08', name: '25m Back', category: 'Grade 3-4 Boys', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-09', name: '25m Breast', category: 'Grade 3-4 Girls', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-10', name: '25m Breast', category: 'Grade 3-4 Boys', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-11', name: '25m Free', category: 'Grade 3-4 Girls', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-12', name: '25m Free', category: 'Grade 3-4 Boys', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-13', name: '25m Backstroke Kicks', category: 'Grade 3-4 Girls', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-14', name: '25m Backstroke Kicks', category: 'Grade 3-4 Boys', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-15', name: '50m Breast', category: 'Grade 3-4 Girls', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-16', name: '50m Breast', category: 'Grade 3-4 Boys', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-17', name: '50m Free', category: 'Grade 3-4 Girls', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-18', name: '50m Free', category: 'Grade 3-4 Boys', day: 'Mar 31', group: 'Grade 1-4', isRelay: false, completed: false, scores: {} },
-        { id: 'G1-19', name: '4x25m Mixed Freestyle Relay', category: 'Grade 1-4', day: 'Mar 31', group: 'Grade 1-4', isRelay: true, completed: false, scores: {} },
-        { id: 'G1-20', name: '4x25m Freestyle Relay', category: 'Grade 1-4 Girls', day: 'Mar 31', group: 'Grade 1-4', isRelay: true, completed: false, scores: {} },
-        { id: 'G1-21', name: '4x25m Freestyle Relay', category: 'Grade 1-4 Boys', day: 'Mar 31', group: 'Grade 1-4', isRelay: true, completed: false, scores: {} },
+        // ==================== DAY 1: MARCH 30 - EVENTS 101-106 (GRADE 1-2) ====================
+        { id: 'E101', name: 'Girls 8 & Under 17 SC Meter Backstroke Kickboard', category: 'Grade 1-2 Girls', day: 'Mar 30', group: 'Grade 1-2', isRelay: false, completed: false, scores: {} },
+        { id: 'E102', name: 'Boys 8 & Under 17 SC Meter Backstroke Kickboard', category: 'Grade 1-2 Boys', day: 'Mar 30', group: 'Grade 1-2', isRelay: false, completed: false, scores: {} },
+        { id: 'E103', name: 'Girls 8 & Under 17 SC Meter Freestyle Kickboard', category: 'Grade 1-2 Girls', day: 'Mar 30', group: 'Grade 1-2', isRelay: false, completed: false, scores: {} },
+        { id: 'E104', name: 'Boys 8 & Under 17 SC Meter Freestyle Kickboard', category: 'Grade 1-2 Boys', day: 'Mar 30', group: 'Grade 1-2', isRelay: false, completed: false, scores: {} },
+        { id: 'E105', name: 'Girls 8 & Under 25 SC Meter Freestyle Kickboard', category: 'Grade 1-2 Girls', day: 'Mar 30', group: 'Grade 1-2', isRelay: false, completed: false, scores: {} },
+        { id: 'E106', name: 'Boys 8 & Under 25 SC Meter Freestyle Kickboard', category: 'Grade 1-2 Boys', day: 'Mar 30', group: 'Grade 1-2', isRelay: false, completed: false, scores: {} },
         
-        // Grade 5-9 Day (April 1)
-        { id: 'G5-01', name: '100m IM (Fly, Back, Breast, Free)', category: 'Grade 7-9 Girls', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-02', name: '100m IM (Fly, Back, Breast, Free)', category: 'Grade 7-9 Boys', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-03', name: '50m Fly', category: 'Grade 5-6 Girls', day: 'Apr 1', group: 'Grade 5-6', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-04', name: '50m Fly', category: 'Grade 5-6 Boys', day: 'Apr 1', group: 'Grade 5-6', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-05', name: '50m Fly', category: 'Grade 7-9 Girls', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-06', name: '50m Fly', category: 'Grade 7-9 Boys', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-07', name: '50m Back', category: 'Grade 5-6 Girls', day: 'Apr 1', group: 'Grade 5-6', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-08', name: '50m Back', category: 'Grade 5-6 Boys', day: 'Apr 1', group: 'Grade 5-6', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-09', name: '50m Back', category: 'Grade 7-9 Girls', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-10', name: '50m Back', category: 'Grade 7-9 Boys', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-11', name: '50m Breast', category: 'Grade 5-6 Girls', day: 'Apr 1', group: 'Grade 5-6', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-12', name: '50m Breast', category: 'Grade 5-6 Boys', day: 'Apr 1', group: 'Grade 5-6', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-13', name: '50m Breast', category: 'Grade 7-9 Girls', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-14', name: '50m Breast', category: 'Grade 7-9 Boys', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-15', name: '50m Free', category: 'Grade 5-6 Girls', day: 'Apr 1', group: 'Grade 5-6', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-16', name: '50m Free', category: 'Grade 5-6 Boys', day: 'Apr 1', group: 'Grade 5-6', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-17', name: '50m Free', category: 'Grade 7-9 Girls', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-18', name: '50m Free', category: 'Grade 7-9 Boys', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-19', name: '25m Free', category: 'Grade 5-6 Girls', day: 'Apr 1', group: 'Grade 5-6', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-20', name: '25m Free', category: 'Grade 5-6 Boys', day: 'Apr 1', group: 'Grade 5-6', isRelay: false, completed: false, scores: {} },
-        { id: 'G5-21', name: '4x25m Medley Relay', category: 'Grade 7-9 Girls', day: 'Apr 1', group: 'Grade 7-9', isRelay: true, completed: false, scores: {} },
-        { id: 'G5-22', name: '4x25m Medley Relay', category: 'Grade 7-9 Boys', day: 'Apr 1', group: 'Grade 7-9', isRelay: true, completed: false, scores: {} },
-        { id: 'G5-23', name: '4x25m Freestyle Relay', category: 'Grade 5-6 Girls', day: 'Apr 1', group: 'Grade 5-6', isRelay: true, completed: false, scores: {} },
-        { id: 'G5-24', name: '4x25m Freestyle Relay', category: 'Grade 5-6 Boys', day: 'Apr 1', group: 'Grade 5-6', isRelay: true, completed: false, scores: {} },
-        { id: 'G5-25', name: '4x25m Mixed Freestyle Relay', category: 'Grade 7-9', day: 'Apr 1', group: 'Grade 7-9', isRelay: true, completed: false, scores: {} },
-        { id: 'G5-26', name: '4x25m Mixed Freestyle Relay', category: 'Grade 5-6', day: 'Apr 1', group: 'Grade 5-6', isRelay: true, completed: false, scores: {} }
+        // ==================== DAY 2: MARCH 31 - EVENTS 201-217 (GRADE 3-6) ====================
+        { id: 'E201', name: 'Girls 10 & Under 25 SC Meter Freestyle', category: 'Grade 3-4 Girls', day: 'Mar 31', group: 'Grade 3-6', isRelay: false, completed: false, scores: {} },
+        { id: 'E202', name: 'Boys 10 & Under 25 SC Meter Freestyle', category: 'Grade 3-4 Boys', day: 'Mar 31', group: 'Grade 3-6', isRelay: false, completed: false, scores: {} },
+        { id: 'E203', name: 'Girls 10-13 25 SC Meter Freestyle', category: 'Grade 5-6 Girls', day: 'Mar 31', group: 'Grade 3-6', isRelay: false, completed: false, scores: {} },
+        { id: 'E204', name: 'Boys 10-13 25 SC Meter Freestyle', category: 'Grade 5-6 Boys', day: 'Mar 31', group: 'Grade 3-6', isRelay: false, completed: false, scores: {} },
+        { id: 'E205', name: 'Girls 10 & Under 25 SC Meter Backstroke Kickboard', category: 'Grade 3-4 Girls', day: 'Mar 31', group: 'Grade 3-6', isRelay: false, completed: false, scores: {} },
+        { id: 'E206', name: 'Boys 10 & Under 25 SC Meter Backstroke Kickboard', category: 'Grade 3-4 Boys', day: 'Mar 31', group: 'Grade 3-6', isRelay: false, completed: false, scores: {} },
+        { id: 'E207', name: 'Girls 10-13 25 SC Meter Backstroke', category: 'Grade 5-6 Girls', day: 'Mar 31', group: 'Grade 3-6', isRelay: false, completed: false, scores: {} },
+        { id: 'E208', name: 'Boys 10-13 25 SC Meter Backstroke', category: 'Grade 5-6 Boys', day: 'Mar 31', group: 'Grade 3-6', isRelay: false, completed: false, scores: {} },
+        { id: 'E209', name: 'Girls 10-13 25 SC Meter Breaststroke', category: 'Grade 5-6 Girls', day: 'Mar 31', group: 'Grade 3-6', isRelay: false, completed: false, scores: {} },
+        { id: 'E210', name: 'Boys 10-13 25 SC Meter Breaststroke', category: 'Grade 5-6 Boys', day: 'Mar 31', group: 'Grade 3-6', isRelay: false, completed: false, scores: {} },
+        { id: 'E211', name: 'Girls 10-13 25 SC Meter Butterfly', category: 'Grade 5-6 Girls', day: 'Mar 31', group: 'Grade 3-6', isRelay: false, completed: false, scores: {} },
+        { id: 'E212', name: 'Boys 10-13 25 SC Meter Butterfly', category: 'Grade 5-6 Boys', day: 'Mar 31', group: 'Grade 3-6', isRelay: false, completed: false, scores: {} },
+        { id: 'E213', name: 'Mixed 10 & Under 100 SC Meter Freestyle Relay', category: 'Grade 3-4 Mixed', day: 'Mar 31', group: 'Grade 3-6', isRelay: true, completed: false, scores: {} },
+        { id: 'E214', name: 'Mixed 10-13 100 SC Meter Medley Relay', category: 'Grade 5-6 Mixed', day: 'Mar 31', group: 'Grade 3-6', isRelay: true, completed: false, scores: {} },
+        { id: 'E215', name: 'Girls 10 & Under 100 SC Meter Freestyle Relay', category: 'Grade 3-4 Girls', day: 'Mar 31', group: 'Grade 3-6', isRelay: true, completed: false, scores: {} },
+        { id: 'E216', name: 'Boys 10 & Under 100 SC Meter Freestyle Relay', category: 'Grade 3-4 Boys', day: 'Mar 31', group: 'Grade 3-6', isRelay: true, completed: false, scores: {} },
+        { id: 'E217', name: 'Mixed 10-13 100 SC Meter Freestyle Relay', category: 'Grade 5-6 Mixed', day: 'Mar 31', group: 'Grade 3-6', isRelay: true, completed: false, scores: {} },
+        
+        // ==================== DAY 3: APRIL 1 - EVENTS 301-315 (GRADE 7-9) ====================
+        { id: 'E301', name: 'Girls 12 & Over 100 SC Meter IM', category: 'Grade 7-9 Girls', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
+        { id: 'E302', name: 'Boys 12 & Over 100 SC Meter IM', category: 'Grade 7-9 Boys', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
+        { id: 'E303', name: 'Girls 12 & Over 25 SC Meter Breaststroke', category: 'Grade 7-9 Girls', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
+        { id: 'E304', name: 'Boys 12 & Over 25 SC Meter Breaststroke', category: 'Grade 7-9 Boys', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
+        { id: 'E305', name: 'Girls 12 & Over 25 SC Meter Backstroke', category: 'Grade 7-9 Girls', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
+        { id: 'E306', name: 'Boys 12 & Over 25 SC Meter Backstroke', category: 'Grade 7-9 Boys', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
+        { id: 'E307', name: 'Girls 12 & Over 25 SC Meter Butterfly', category: 'Grade 7-9 Girls', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
+        { id: 'E308', name: 'Boys 12 & Over 25 SC Meter Butterfly', category: 'Grade 7-9 Boys', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
+        { id: 'E309', name: 'Mixed 12 & Over 100 SC Meter Medley Relay', category: 'Grade 7-9 Mixed', day: 'Apr 1', group: 'Grade 7-9', isRelay: true, completed: false, scores: {} },
+        { id: 'E310', name: 'Girls 12 & Over 25 SC Meter Freestyle', category: 'Grade 7-9 Girls', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
+        { id: 'E311', name: 'Boys 12 & Over 25 SC Meter Freestyle', category: 'Grade 7-9 Boys', day: 'Apr 1', group: 'Grade 7-9', isRelay: false, completed: false, scores: {} },
+        { id: 'E312', name: 'Girls 12 & Over 100 SC Meter Freestyle Relay', category: 'Grade 7-9 Girls', day: 'Apr 1', group: 'Grade 7-9', isRelay: true, completed: false, scores: {} },
+        { id: 'E313', name: 'Boys 100 SC Meter Freestyle Relay', category: 'Grade 7-9 Boys', day: 'Apr 1', group: 'Grade 7-9', isRelay: true, completed: false, scores: {} },
+        { id: 'E314', name: 'Girls 12 & Over 100 SC Meter Medley Relay', category: 'Grade 7-9 Girls', day: 'Apr 1', group: 'Grade 7-9', isRelay: true, completed: false, scores: {} },
+        { id: 'E315', name: 'Boys 100 SC Meter Medley Relay', category: 'Grade 7-9 Boys', day: 'Apr 1', group: 'Grade 7-9', isRelay: true, completed: false, scores: {} }
     ],
     videos: [],
     history: [],
@@ -695,14 +688,18 @@ function renderBreakdown() {
 function renderEvents() {
     const container = document.getElementById('eventsContent');
     
-    const day1Events = AppData.events.filter(e => e.day === 'Mar 31');
-    const day2Events = AppData.events.filter(e => e.day === 'Apr 1');
+    const day1Events = AppData.events.filter(e => e.day === 'Mar 30');
+    const day2Events = AppData.events.filter(e => e.day === 'Mar 31');
+    const day3Events = AppData.events.filter(e => e.day === 'Apr 1');
     
-    let html = '<div style="grid-column: 1/-1; font-weight: 700; color: var(--mvs-blue); margin-bottom: 10px; font-size: 1.1rem;">📅 March 31 - Grade 1-4</div>';
+    let html = '<div style="grid-column: 1/-1; font-weight: 700; color: var(--mvs-blue); margin-bottom: 10px; font-size: 1.1rem;">📅 March 30 - Grade 1-2</div>';
     html += day1Events.map(event => renderEventCard(event)).join('');
     
-    html += '<div style="grid-column: 1/-1; font-weight: 700; color: var(--mvs-blue); margin: 20px 0 10px; font-size: 1.1rem;">📅 April 1 - Grade 5-9</div>';
+    html += '<div style="grid-column: 1/-1; font-weight: 700; color: var(--mvs-blue); margin: 20px 0 10px; font-size: 1.1rem;">📅 March 31 - Grade 3-6</div>';
     html += day2Events.map(event => renderEventCard(event)).join('');
+    
+    html += '<div style="grid-column: 1/-1; font-weight: 700; color: var(--mvs-blue); margin: 20px 0 10px; font-size: 1.1rem;">📅 April 1 - Grade 7-9</div>';
+    html += day3Events.map(event => renderEventCard(event)).join('');
     
     container.innerHTML = html;
 }

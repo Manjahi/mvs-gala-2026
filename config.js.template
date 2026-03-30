@@ -1,0 +1,14 @@
+// Firebase Configuration Template
+// 1. Copy this file to config.js
+// 2. Replace with your Firebase config from console.firebase.google.com
+// 3. config.js is in .gitignore and won't be uploaded to GitHub
+
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY_HERE",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};

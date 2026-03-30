@@ -1,0 +1,15 @@
+# Firebase Config (contains sensitive keys)
+config.js
+
+# Backup files
+backup-files/
+*.backup
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+*.swp
+*.swo
