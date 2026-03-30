@@ -15,6 +15,7 @@
         onValue,
         push,
         remove,
+        get,
       } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
       // Your Firebase config (replace with your own)
@@ -32,7 +33,7 @@
       // Initialize Firebase
       window.firebaseApp = initializeApp(firebaseConfig);
       window.db = getDatabase(firebaseApp);
-      window.firebaseRefs = { ref, set, onValue, push, remove };
+      window.firebaseRefs = { ref, set, onValue, push, remove, get };
     </script>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap");
@@ -1349,6 +1350,31 @@
         display: none !important;
       }
 
+      /* Public view refresh button */
+      .refresh-btn {
+        background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s ease;
+      }
+
+      .refresh-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(66, 153, 225, 0.4);
+      }
+
+      .public-view .refresh-btn {
+        display: flex !important;
+      }
+
       .expired-notice {
         position: fixed;
         top: 50%;
@@ -2184,10 +2210,13 @@
 
         <div class="header-right">
           <div class="anniversary-badge">40 Years of Excellence</div>
-          <div class="live-indicator">
+          <div class="live-indicator" id="liveIndicator">
             <span class="pulse"></span>
             LIVE
           </div>
+          <button class="refresh-btn" id="publicRefreshBtn" onclick="forceSyncFromFirebase(true)" title="Refresh Scores">
+            🔄 Refresh
+          </button>
         </div>
       </header>
 
@@ -2461,8 +2490,35 @@
 
       // Initialize
       function init() {
-        loadFromStorage();
-        checkPublicView();
+        const isPublic = checkPublicView();
+
+        if (isPublic) {
+          // Public view: Start with fresh default data, will load from Firebase
+          appData = {
+            houses: {
+              Tsavo: { color: "#d69e2e", id: "tsavo" },
+              Amboseli: { color: "#e53e3e", id: "amboseli" },
+              Aberdare: { color: "#38a169", id: "aberdare" },
+              Mara: { color: "#3182ce", id: "mara" },
+              Samburu: { color: "#805ad5", id: "samburu" },
+            },
+            participants: [],
+            events: JSON.parse(JSON.stringify(defaultEvents)),
+            videos: [],
+            scores: {},
+            history: [],
+            settings: {
+              rotationInterval: 10,
+              videoDuration: 30,
+              leaderboardCycles: 3,
+              autoRotate: true,
+            },
+          };
+          showLoadingState();
+        } else {
+          // Admin view: Load from localStorage
+          loadFromStorage();
+        }
 
         if (appData.events.length === 0) {
           appData.events = JSON.parse(JSON.stringify(defaultEvents));
@@ -2487,8 +2543,8 @@
 
         // Setup Firebase sync (wait for Firebase to load)
         setTimeout(() => {
-          setupFirebaseListener();
-        }, 2000);
+          setupFirebaseWithRetry(isPublic);
+        }, isPublic ? 1000 : 2000);
       }
 
       // Config version - increment this when events/dates change to force refresh
@@ -2526,12 +2582,97 @@
         const { set, ref } = window.firebaseRefs;
         const galaRef = ref(window.db, "gala/data");
 
-        set(galaRef, appData)
+        // Add timestamp for conflict resolution
+        const dataToSave = {
+          ...appData,
+          _lastModified: Date.now()
+        };
+
+        set(galaRef, dataToSave)
           .then(() => console.log("Synced to Firebase"))
           .catch((err) => console.error("Firebase sync error:", err));
       }
 
-      function setupFirebaseListener() {
+      function setupFirebaseWithRetry(isPublic, attempt = 1) {
+        const maxAttempts = 5;
+        
+        if (window.db && window.firebaseRefs) {
+          console.log("Firebase ready!");
+          setupFirebaseListener(isPublic);
+          
+          // For public view, force immediate Firebase load
+          if (isPublic) {
+            setTimeout(() => {
+              forceSyncFromFirebase(true);
+            }, 500);
+          }
+        } else if (attempt < maxAttempts) {
+          console.log(`Firebase not ready, retrying (${attempt}/${maxAttempts})...`);
+          setTimeout(() => {
+            setupFirebaseWithRetry(isPublic, attempt + 1);
+          }, 1000);
+        } else {
+          console.error("Firebase failed to initialize after", maxAttempts, "attempts");
+          if (isPublic) {
+            showFirebaseError();
+          } else {
+            alert("Warning: Could not connect to Firebase. Changes will be saved locally only.");
+          }
+        }
+      }
+
+      function forceSyncFromFirebase(isPublic = false) {
+        if (!window.db || !window.firebaseRefs) return;
+        
+        const { ref, get } = window.firebaseRefs;
+        const galaRef = ref(window.db, "gala/data");
+        
+        get(galaRef).then((snapshot) => {
+          const data = snapshot.val();
+          if (data) {
+            appData = data;
+            saveToStorage();
+            renderAll();
+            console.log("Force synced from Firebase");
+          }
+        }).catch((err) => {
+          console.error("Force sync error:", err);
+        });
+      }
+
+      function showLoadingState() {
+        const container = document.getElementById("standingsContent");
+        if (container) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 40px; color: #4a5568;">
+              <div style="font-size: 3rem; margin-bottom: 20px; animation: pulse 1.5s infinite;">🏊</div>
+              <h3>Loading Live Data...</h3>
+              <p style="color: #718096; margin-top: 10px;">Connecting to championship database</p>
+            </div>
+          `;
+        }
+      }
+
+      function showFirebaseError() {
+        const container = document.getElementById("standingsContent");
+        if (container) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 40px; color: #e53e3e;">
+              <div style="font-size: 3rem; margin-bottom: 20px;">🔌</div>
+              <h3>Connection Failed</h3>
+              <p>Could not connect to the database.</p>
+              <p style="font-size: 0.9rem; color: #718096; margin-top: 10px;">
+                Please check your internet connection and refresh.
+              </p>
+              <button onclick="location.reload()" class="btn btn-primary" style="margin-top: 20px;">
+                🔄 Retry
+              </button>
+            </div>
+          `;
+        }
+      }
+
+      function setupFirebaseListener(isPublic = false) {
         if (!window.db || !window.firebaseRefs) {
           console.log("Firebase not initialized");
           return;
@@ -2543,18 +2684,36 @@
         onValue(galaRef, (snapshot) => {
           const data = snapshot.val();
           if (data) {
-            // Only update if data is different (avoid loops)
-            const currentData = JSON.stringify(appData);
-            const newData = JSON.stringify(data);
+            // For public view: always accept Firebase data
+            // For admin view: only update if newer (avoid overwriting local changes)
+            const shouldUpdate = isPublic || 
+              (data._lastModified && data._lastModified > (appData._lastModified || 0));
+            
+            if (shouldUpdate) {
+              const currentData = JSON.stringify(appData);
+              const newData = JSON.stringify(data);
 
-            if (currentData !== newData) {
-              appData = data;
-              saveToStorage();
-              renderAll();
-              console.log("Updated from Firebase");
+              if (currentData !== newData) {
+                appData = data;
+                saveToStorage();
+                renderAll();
+                console.log("Updated from Firebase");
+                if (isPublic) showUpdateNotification();
+              }
             }
           }
         });
+      }
+
+      function showUpdateNotification() {
+        // Visual feedback that data was updated
+        const indicator = document.getElementById('liveIndicator');
+        if (indicator) {
+          indicator.style.animation = 'none';
+          setTimeout(() => {
+            indicator.style.animation = 'pulse 1s infinite';
+          }, 10);
+        }
       }
 
       function renderAll() {
@@ -2592,12 +2751,15 @@
                             </p>
                         </div>
                     `;
-            return;
+            return true; // Still return true so init knows it's public
           }
 
           document.body.classList.add("public-view");
-          document.getElementById("settingsBtn").classList.add("hidden");
+          const settingsBtn = document.getElementById("settingsBtn");
+          if (settingsBtn) settingsBtn.classList.add("hidden");
+          return true;
         }
+        return false;
       }
 
       function isPublicView() {
