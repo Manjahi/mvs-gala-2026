@@ -1346,7 +1346,8 @@
         grid-template-columns: 1fr !important;
       }
 
-      .public-view .tab-btn[data-tab="2"] {
+      .public-view .tab-btn[data-tab="2"],
+      .public-view #tab-2 {
         display: none !important;
       }
 
@@ -2622,7 +2623,13 @@
       }
 
       function forceSyncFromFirebase(isPublic = false) {
-        if (!window.db || !window.firebaseRefs) return;
+        if (!window.db || !window.firebaseRefs) {
+          console.error("Firebase not initialized");
+          showConnectionStatus("error", "Firebase not initialized");
+          return;
+        }
+        
+        showConnectionStatus("loading", "Fetching data...");
         
         const { ref, get } = window.firebaseRefs;
         const galaRef = ref(window.db, "gala/data");
@@ -2634,10 +2641,29 @@
             saveToStorage();
             renderAll();
             console.log("Force synced from Firebase");
+            showConnectionStatus("connected", "Live data");
+          } else {
+            console.log("No data found in Firebase");
+            showConnectionStatus("error", "No data available");
           }
         }).catch((err) => {
           console.error("Force sync error:", err);
+          showConnectionStatus("error", err.message || "Connection failed");
         });
+      }
+
+      function showConnectionStatus(status, message) {
+        const indicator = document.getElementById('liveIndicator');
+        if (indicator) {
+          const statusMap = {
+            loading: { color: '#f6ad55', text: '⏳ ' + message },
+            connected: { color: '#48bb78', text: '● LIVE' },
+            error: { color: '#f56565', text: '⚠️ ' + message }
+          };
+          const config = statusMap[status] || statusMap.error;
+          indicator.style.background = config.color;
+          indicator.innerHTML = `<span class="pulse"></span>${config.text}`;
+        }
       }
 
       function showLoadingState() {
@@ -2698,10 +2724,17 @@
                 saveToStorage();
                 renderAll();
                 console.log("Updated from Firebase");
+                showConnectionStatus("connected", "Live data");
                 if (isPublic) showUpdateNotification();
               }
             }
+          } else {
+            console.log("No data in Firebase yet");
+            if (isPublic) showConnectionStatus("error", "No event data");
           }
+        }, (error) => {
+          console.error("Firebase listener error:", error);
+          showConnectionStatus("error", error.message || "Permission denied");
         });
       }
 
