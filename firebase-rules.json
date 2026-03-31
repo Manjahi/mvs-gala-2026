@@ -1,0 +1,17 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": true,
+    "gala": {
+      "data": {
+        ".read": true,
+        ".write": true,
+        ".validate": "newData.hasChildren(['houses', 'events', 'scores', 'history', 'settings']) || newData.val() == null"
+      }
+    },
+    "test": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}
