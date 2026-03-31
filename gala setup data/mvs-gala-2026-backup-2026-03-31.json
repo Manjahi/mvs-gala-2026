@@ -1,0 +1,378 @@
+{
+  "houses": {
+    "Tsavo": {
+      "color": "#d69e2e",
+      "id": "tsavo"
+    },
+    "Amboseli": {
+      "color": "#e53e3e",
+      "id": "amboseli"
+    },
+    "Aberdare": {
+      "color": "#38a169",
+      "id": "aberdare"
+    },
+    "Mara": {
+      "color": "#3182ce",
+      "id": "mara"
+    },
+    "Samburu": {
+      "color": "#805ad5",
+      "id": "samburu"
+    }
+  },
+  "participants": [],
+  "events": [
+    {
+      "id": "E101",
+      "name": "Girls 8 & Under 17 SC Meter Backstroke Kickboard",
+      "category": "Grade 1-2 Girls",
+      "day": "Mar 30",
+      "group": "Grade 1-2",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E102",
+      "name": "Boys 8 & Under 17 SC Meter Backstroke Kickboard",
+      "category": "Grade 1-2 Boys",
+      "day": "Mar 30",
+      "group": "Grade 1-2",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E103",
+      "name": "Girls 8 & Under 17 SC Meter Freestyle Kickboard",
+      "category": "Grade 1-2 Girls",
+      "day": "Mar 30",
+      "group": "Grade 1-2",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E104",
+      "name": "Boys 8 & Under 17 SC Meter Freestyle Kickboard",
+      "category": "Grade 1-2 Boys",
+      "day": "Mar 30",
+      "group": "Grade 1-2",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E105",
+      "name": "Girls 8 & Under 25 SC Meter Freestyle Kickboard",
+      "category": "Grade 1-2 Girls",
+      "day": "Mar 30",
+      "group": "Grade 1-2",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E106",
+      "name": "Boys 8 & Under 25 SC Meter Freestyle Kickboard",
+      "category": "Grade 1-2 Boys",
+      "day": "Mar 30",
+      "group": "Grade 1-2",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E201",
+      "name": "Girls 10 & Under 25 SC Meter Freestyle",
+      "category": "Grade 3-4 Girls",
+      "day": "Mar 31",
+      "group": "Grade 3-6",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E202",
+      "name": "Boys 10 & Under 25 SC Meter Freestyle",
+      "category": "Grade 3-4 Boys",
+      "day": "Mar 31",
+      "group": "Grade 3-6",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E203",
+      "name": "Girls 10-13 25 SC Meter Freestyle",
+      "category": "Grade 5-6 Girls",
+      "day": "Mar 31",
+      "group": "Grade 3-6",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E204",
+      "name": "Boys 10-13 25 SC Meter Freestyle",
+      "category": "Grade 5-6 Boys",
+      "day": "Mar 31",
+      "group": "Grade 3-6",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E205",
+      "name": "Girls 10 & Under 25 SC Meter Backstroke Kickboard",
+      "category": "Grade 3-4 Girls",
+      "day": "Mar 31",
+      "group": "Grade 3-6",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E206",
+      "name": "Boys 10 & Under 25 SC Meter Backstroke Kickboard",
+      "category": "Grade 3-4 Boys",
+      "day": "Mar 31",
+      "group": "Grade 3-6",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E207",
+      "name": "Girls 10-13 25 SC Meter Backstroke",
+      "category": "Grade 5-6 Girls",
+      "day": "Mar 31",
+      "group": "Grade 3-6",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E208",
+      "name": "Boys 10-13 25 SC Meter Backstroke",
+      "category": "Grade 5-6 Boys",
+      "day": "Mar 31",
+      "group": "Grade 3-6",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E209",
+      "name": "Girls 10-13 25 SC Meter Breaststroke",
+      "category": "Grade 5-6 Girls",
+      "day": "Mar 31",
+      "group": "Grade 3-6",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E210",
+      "name": "Boys 10-13 25 SC Meter Breaststroke",
+      "category": "Grade 5-6 Boys",
+      "day": "Mar 31",
+      "group": "Grade 3-6",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E211",
+      "name": "Girls 10-13 25 SC Meter Butterfly",
+      "category": "Grade 5-6 Girls",
+      "day": "Mar 31",
+      "group": "Grade 3-6",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E212",
+      "name": "Boys 10-13 25 SC Meter Butterfly",
+      "category": "Grade 5-6 Boys",
+      "day": "Mar 31",
+      "group": "Grade 3-6",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E213",
+      "name": "Mixed 10 & Under 100 SC Meter Freestyle Relay",
+      "category": "Grade 3-4 Mixed",
+      "day": "Mar 31",
+      "group": "Grade 3-6",
+      "type": "relay",
+      "completed": false
+    },
+    {
+      "id": "E214",
+      "name": "Mixed 10-13 100 SC Meter Medley Relay",
+      "category": "Grade 5-6 Mixed",
+      "day": "Mar 31",
+      "group": "Grade 3-6",
+      "type": "relay",
+      "completed": false
+    },
+    {
+      "id": "E215",
+      "name": "Girls 10 & Under 100 SC Meter Freestyle Relay",
+      "category": "Grade 3-4 Girls",
+      "day": "Mar 31",
+      "group": "Grade 3-6",
+      "type": "relay",
+      "completed": false
+    },
+    {
+      "id": "E216",
+      "name": "Boys 10 & Under 100 SC Meter Freestyle Relay",
+      "category": "Grade 3-4 Boys",
+      "day": "Mar 31",
+      "group": "Grade 3-6",
+      "type": "relay",
+      "completed": false
+    },
+    {
+      "id": "E217",
+      "name": "Mixed 10-13 100 SC Meter Freestyle Relay",
+      "category": "Grade 5-6 Mixed",
+      "day": "Mar 31",
+      "group": "Grade 3-6",
+      "type": "relay",
+      "completed": false
+    },
+    {
+      "id": "E301",
+      "name": "Girls 12 & Over 100 SC Meter IM",
+      "category": "Grade 7-9 Girls",
+      "day": "Apr 1",
+      "group": "Grade 7-9",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E302",
+      "name": "Boys 12 & Over 100 SC Meter IM",
+      "category": "Grade 7-9 Boys",
+      "day": "Apr 1",
+      "group": "Grade 7-9",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E303",
+      "name": "Girls 12 & Over 25 SC Meter Breaststroke",
+      "category": "Grade 7-9 Girls",
+      "day": "Apr 1",
+      "group": "Grade 7-9",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E304",
+      "name": "Boys 12 & Over 25 SC Meter Breaststroke",
+      "category": "Grade 7-9 Boys",
+      "day": "Apr 1",
+      "group": "Grade 7-9",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E305",
+      "name": "Girls 12 & Over 25 SC Meter Backstroke",
+      "category": "Grade 7-9 Girls",
+      "day": "Apr 1",
+      "group": "Grade 7-9",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E306",
+      "name": "Boys 12 & Over 25 SC Meter Backstroke",
+      "category": "Grade 7-9 Boys",
+      "day": "Apr 1",
+      "group": "Grade 7-9",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E307",
+      "name": "Girls 12 & Over 25 SC Meter Butterfly",
+      "category": "Grade 7-9 Girls",
+      "day": "Apr 1",
+      "group": "Grade 7-9",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E308",
+      "name": "Boys 12 & Over 25 SC Meter Butterfly",
+      "category": "Grade 7-9 Boys",
+      "day": "Apr 1",
+      "group": "Grade 7-9",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E309",
+      "name": "Mixed 12 & Over 100 SC Meter Medley Relay",
+      "category": "Grade 7-9 Mixed",
+      "day": "Apr 1",
+      "group": "Grade 7-9",
+      "type": "relay",
+      "completed": false
+    },
+    {
+      "id": "E310",
+      "name": "Girls 12 & Over 25 SC Meter Freestyle",
+      "category": "Grade 7-9 Girls",
+      "day": "Apr 1",
+      "group": "Grade 7-9",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E311",
+      "name": "Boys 12 & Over 25 SC Meter Freestyle",
+      "category": "Grade 7-9 Boys",
+      "day": "Apr 1",
+      "group": "Grade 7-9",
+      "type": "individual",
+      "completed": false
+    },
+    {
+      "id": "E312",
+      "name": "Girls 12 & Over 100 SC Meter Freestyle Relay",
+      "category": "Grade 7-9 Girls",
+      "day": "Apr 1",
+      "group": "Grade 7-9",
+      "type": "relay",
+      "completed": false
+    },
+    {
+      "id": "E313",
+      "name": "Boys 100 SC Meter Freestyle Relay",
+      "category": "Grade 7-9 Boys",
+      "day": "Apr 1",
+      "group": "Grade 7-9",
+      "type": "relay",
+      "completed": false
+    },
+    {
+      "id": "E314",
+      "name": "Girls 12 & Over 100 SC Meter Medley Relay",
+      "category": "Grade 7-9 Girls",
+      "day": "Apr 1",
+      "group": "Grade 7-9",
+      "type": "relay",
+      "completed": false
+    },
+    {
+      "id": "E315",
+      "name": "Boys 100 SC Meter Medley Relay",
+      "category": "Grade 7-9 Boys",
+      "day": "Apr 1",
+      "group": "Grade 7-9",
+      "type": "relay",
+      "completed": false
+    }
+  ],
+  "videos": [],
+  "scores": {},
+  "history": [],
+  "settings": {
+    "rotationInterval": 10,
+    "videoDuration": 30,
+    "leaderboardCycles": 3,
+    "autoRotate": true
+  }
+}

@@ -2515,33 +2515,18 @@
           },
         };
 
-        if (isPublic) {
-          showLoadingState();
-        } else {
-          // Admin: show loading state too, will load from Firebase
-          showLoadingState();
-        }
-
-        renderHousesList();
-        renderParticipantsList();
-        renderParticipantHouseSelect();
-        renderVideos();
-        renderStandings();
-        renderBreakdown();
-        renderEvents();
-        renderHistory();
-        renderEventManagementLists();
-
-        // Start auto-rotation if enabled (works in both admin and public view)
-        if (appData.settings.autoRotate) {
-          startRotation();
-        }
+        // Always show loading state initially while we fetch from Firebase
+        showLoadingState();
 
         setupAdminShortcut();
 
-        // Setup Firebase sync immediately
+        // Setup Firebase sync immediately - both admin and public need to load from Firebase
         setTimeout(() => {
           setupFirebaseWithRetry(isPublic);
+          // Force immediate sync for both admin and public to ensure data is loaded
+          setTimeout(() => {
+            forceSyncFromFirebase(isPublic);
+          }, 300);
         }, 500);
       }
 
@@ -3247,6 +3232,16 @@
         const day1Container = document.getElementById("day1EventList");
         const day2Container = document.getElementById("day2EventList");
         const day3Container = document.getElementById("day3EventList");
+        
+        if (!day1Container || !day2Container || !day3Container) return;
+        
+        // Guard against undefined events
+        if (!appData || !appData.events || !Array.isArray(appData.events)) {
+          day1Container.innerHTML = '<p style="color: #a0aec0; text-align: center;">Loading...</p>';
+          day2Container.innerHTML = '<p style="color: #a0aec0; text-align: center;">Loading...</p>';
+          day3Container.innerHTML = '<p style="color: #a0aec0; text-align: center;">Loading...</p>';
+          return;
+        }
 
         const day1Events = appData.events.filter((e) => e.day === "Mar 30");
         const day2Events = appData.events.filter((e) => e.day === "Mar 31");
@@ -3672,6 +3667,19 @@
       // Rendering Functions
       function renderStandings() {
         const container = document.getElementById("standingsContent");
+        if (!container) return;
+        
+        // Guard against undefined data
+        if (!appData || !appData.houses || !appData.events) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-state-icon">⏳</div>
+              <h3>Loading...</h3>
+              <p>Please wait while data loads</p>
+            </div>
+          `;
+          return;
+        }
 
         const totals = {};
         const medals = {};
@@ -3680,7 +3688,7 @@
           medals[h] = { gold: 0, silver: 0, bronze: 0 };
         });
 
-        Object.entries(appData.scores).forEach(([eventId, scores]) => {
+        Object.entries(appData.scores || {}).forEach(([eventId, scores]) => {
           const event = appData.events.find((e) => e.id === eventId);
           if (!event) return;
 
@@ -3745,6 +3753,18 @@
 
       function renderBreakdown() {
         const container = document.getElementById("breakdownContent");
+        if (!container) return;
+        
+        // Guard against undefined data
+        if (!appData || !appData.houses || !appData.events) {
+          container.innerHTML = `
+            <div class="empty-state" style="grid-column: 1/-1;">
+              <div class="empty-state-icon">⏳</div>
+              <h3>Loading...</h3>
+            </div>
+          `;
+          return;
+        }
 
         const houseStats = {};
         Object.keys(appData.houses).forEach((h) => {
@@ -3758,7 +3778,7 @@
           };
         });
 
-        Object.entries(appData.scores).forEach(([eventId, scores]) => {
+        Object.entries(appData.scores || {}).forEach(([eventId, scores]) => {
           const event = appData.events.find((e) => e.id === eventId);
           if (!event) return;
 
@@ -3865,6 +3885,19 @@
 
       function renderEvents() {
         const container = document.getElementById("eventsContent");
+        if (!container) return;
+        
+        // Guard against undefined events
+        if (!appData || !appData.events || !Array.isArray(appData.events)) {
+          container.innerHTML = `
+            <div class="empty-state" style="grid-column: 1/-1;">
+              <div class="empty-state-icon">⏳</div>
+              <h3>Loading events...</h3>
+            </div>
+          `;
+          return;
+        }
+        
         const day = currentEventView === "day1" ? "Mar 30" : currentEventView === "day2" ? "Mar 31" : "Apr 1";
         const dayEvents = appData.events.filter((e) => e.day === day);
 
