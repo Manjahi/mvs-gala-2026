@@ -3134,7 +3134,6 @@
             color: randomColor,
             id: name.toLowerCase().replace(/\s+/g, "-"),
           };
-          saveToStorage();
           renderHousesList();
           renderParticipantHouseSelect();
         }
@@ -3160,14 +3159,12 @@
           }
         });
 
-        saveToStorage();
         renderStandings();
         renderEvents();
       }
 
       function updateHouseColor(name, color) {
         appData.houses[name].color = color;
-        saveToStorage();
         renderStandings();
         renderEvents();
       }
@@ -3182,7 +3179,6 @@
           appData.participants.forEach((p) => {
             if (p.house === name) p.house = "Unassigned";
           });
-          saveToStorage();
           renderHousesList();
           renderStandings();
         }
@@ -3213,13 +3209,11 @@
         });
 
         document.getElementById("participantName").value = "";
-        saveToStorage();
         renderParticipantsList();
       }
 
       function removeParticipant(id) {
         appData.participants = appData.participants.filter((p) => p.id !== id);
-        saveToStorage();
         renderParticipantsList();
       }
 
@@ -3315,7 +3309,6 @@
           completed: false,
         });
 
-        saveToStorage();
         renderEventManagementLists();
         renderEvents();
       }
@@ -3324,7 +3317,6 @@
         const event = appData.events.find((e) => e.id === id);
         if (event) {
           event[field] = value;
-          saveToStorage();
           renderEvents();
         }
       }
@@ -3333,7 +3325,6 @@
         if (confirm("Remove this event?")) {
           appData.events = appData.events.filter((e) => e.id !== id);
           delete appData.scores[id];
-          saveToStorage();
           renderEventManagementLists();
           renderEvents();
           renderStandings();
@@ -3401,13 +3392,11 @@
         document.getElementById("videoTitle").value = "";
         document.getElementById("videoUrl").value = "";
         document.getElementById("videoFile").value = "";
-        saveToStorage();
         renderVideos();
       }
 
       function removeVideo(id) {
         appData.videos = appData.videos.filter((v) => v.id !== id);
-        saveToStorage();
         renderVideos();
       }
 
@@ -3672,7 +3661,6 @@
         // Sync to Firebase if available
         syncToFirebase();
 
-        saveToStorage();
         renderStandings();
         renderBreakdown();
         renderEvents();
@@ -4145,7 +4133,6 @@
         appData.settings.videoDuration = videoDuration;
         appData.settings.leaderboardCycles = cycles;
         appData.settings.autoRotate = autoRotate;
-        saveToStorage();
 
         clearTimers();
         if (autoRotate) startRotation();
@@ -4189,7 +4176,6 @@
           }
         });
         
-        saveToStorage();
         renderAll();
         alert(`✅ Import successful!\n${importedCount} participants imported across ${eventCount} events.`);
         console.log(`Imported ${importedCount} participants across ${eventCount} events`);
