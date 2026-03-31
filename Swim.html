@@ -2489,40 +2489,37 @@
         relay: { 1: 14, 2: 10, 3: 8, 4: 6, 5: 4, 6: 2 },
       };
 
-      // Initialize
+      // Initialize - Firebase ONLY (no localStorage)
       function init() {
         const isPublic = checkPublicView();
 
+        // Start with fresh default data - Firebase is the single source of truth
+        appData = {
+          houses: {
+            Tsavo: { color: "#d69e2e", id: "tsavo" },
+            Amboseli: { color: "#e53e3e", id: "amboseli" },
+            Aberdare: { color: "#38a169", id: "aberdare" },
+            Mara: { color: "#3182ce", id: "mara" },
+            Samburu: { color: "#805ad5", id: "samburu" },
+          },
+          participants: [],
+          events: JSON.parse(JSON.stringify(defaultEvents)),
+          videos: [],
+          scores: {},
+          history: [],
+          settings: {
+            rotationInterval: 10,
+            videoDuration: 30,
+            leaderboardCycles: 3,
+            autoRotate: true,
+          },
+        };
+
         if (isPublic) {
-          // Public view: Start with fresh default data, will load from Firebase
-          appData = {
-            houses: {
-              Tsavo: { color: "#d69e2e", id: "tsavo" },
-              Amboseli: { color: "#e53e3e", id: "amboseli" },
-              Aberdare: { color: "#38a169", id: "aberdare" },
-              Mara: { color: "#3182ce", id: "mara" },
-              Samburu: { color: "#805ad5", id: "samburu" },
-            },
-            participants: [],
-            events: JSON.parse(JSON.stringify(defaultEvents)),
-            videos: [],
-            scores: {},
-            history: [],
-            settings: {
-              rotationInterval: 10,
-              videoDuration: 30,
-              leaderboardCycles: 3,
-              autoRotate: true,
-            },
-          };
           showLoadingState();
         } else {
-          // Admin view: Load from localStorage
-          loadFromStorage();
-        }
-
-        if (appData.events.length === 0) {
-          appData.events = JSON.parse(JSON.stringify(defaultEvents));
+          // Admin: show loading state too, will load from Firebase
+          showLoadingState();
         }
 
         renderHousesList();
@@ -2542,43 +2539,32 @@
 
         setupAdminShortcut();
 
-        // Setup Firebase sync (wait for Firebase to load)
+        // Setup Firebase sync immediately
         setTimeout(() => {
           setupFirebaseWithRetry(isPublic);
-        }, isPublic ? 1000 : 2000);
+        }, 500);
       }
 
-      // Config version - increment this when events/dates change to force refresh
-      const CONFIG_VERSION = "2025-03-30-v5-final";
+      // Config version for reference (not used with localStorage anymore)
+      const CONFIG_VERSION = "2025-03-30-v6-firebase-only";
       
+      // Firebase is the single source of truth - these functions are no-ops
       function loadFromStorage() {
-        const saved = localStorage.getItem("mvsGala2026");
-        const savedVersion = localStorage.getItem("mvsGalaConfigVersion");
-        
-        // Clear storage if config version changed
-        if (savedVersion !== CONFIG_VERSION) {
-          localStorage.removeItem("mvsGala2026");
-          localStorage.setItem("mvsGalaConfigVersion", CONFIG_VERSION);
-          console.log("Config updated to version:", CONFIG_VERSION);
-          return;
-        }
-        
-        if (saved) {
-          try {
-            appData = JSON.parse(saved);
-          } catch (e) {
-            console.error("Failed to load data");
-          }
-        }
+        // DEPRECATED: Firebase is the only data source
+        console.log("Firebase is the single source of truth");
       }
 
       function saveToStorage() {
-        localStorage.setItem("mvsGala2026", JSON.stringify(appData));
+        // DEPRECATED: Data is automatically synced to Firebase
+        // This function is kept for backward compatibility in case any code calls it
       }
 
-      // Firebase Sync Functions
+      // Firebase Sync Functions - ONLY data source
       function syncToFirebase() {
-        if (!window.db || !window.firebaseRefs) return;
+        if (!window.db || !window.firebaseRefs) {
+          console.error("Firebase not initialized, cannot sync");
+          return;
+        }
 
         const { set, ref } = window.firebaseRefs;
         const galaRef = ref(window.db, "gala/data");
@@ -2590,8 +2576,14 @@
         };
 
         set(galaRef, dataToSave)
-          .then(() => console.log("Synced to Firebase"))
-          .catch((err) => console.error("Firebase sync error:", err));
+          .then(() => {
+            console.log("Synced to Firebase");
+            showConnectionStatus("connected", "Saved");
+          })
+          .catch((err) => {
+            console.error("Firebase sync error:", err);
+            showConnectionStatus("error", "Save failed");
+          });
       }
 
       function setupFirebaseWithRetry(isPublic, attempt = 1) {
@@ -2617,7 +2609,7 @@
           if (isPublic) {
             showFirebaseError();
           } else {
-            alert("Warning: Could not connect to Firebase. Changes will be saved locally only.");
+            alert("Error: Could not connect to Firebase. Please check your internet connection.");
           }
         }
       }
@@ -2638,13 +2630,13 @@
           const data = snapshot.val();
           if (data) {
             appData = data;
-            saveToStorage();
             renderAll();
             console.log("Force synced from Firebase");
             showConnectionStatus("connected", "Live data");
           } else {
-            console.log("No data found in Firebase");
-            showConnectionStatus("error", "No data available");
+            console.log("No data found in Firebase - using defaults");
+            renderAll();
+            showConnectionStatus("connected", "Ready");
           }
         }).catch((err) => {
           console.error("Force sync error:", err);
@@ -2721,7 +2713,6 @@
 
               if (currentData !== newData) {
                 appData = data;
-                saveToStorage();
                 renderAll();
                 console.log("Updated from Firebase");
                 showConnectionStatus("connected", "Live data");
@@ -4211,8 +4202,22 @@
           )
         ) {
           if (confirm("Are you absolutely sure? Click OK to confirm.")) {
-            localStorage.removeItem("mvsGala2026");
-            location.reload();
+            // Clear Firebase data
+            if (window.db && window.firebaseRefs) {
+              const { ref, set } = window.firebaseRefs;
+              const galaRef = ref(window.db, "gala/data");
+              set(galaRef, null)
+                .then(() => {
+                  console.log("Firebase data cleared");
+                  location.reload();
+                })
+                .catch((err) => {
+                  console.error("Failed to clear Firebase:", err);
+                  alert("Failed to clear data: " + err.message);
+                });
+            } else {
+              alert("Firebase not initialized. Please refresh and try again.");
+            }
           }
         }
       }
